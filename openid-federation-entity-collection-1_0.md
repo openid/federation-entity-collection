@@ -64,7 +64,7 @@ entities at scale. The following benefits motivate implementation:
   type, and free-form query, reducing client-side processing and network
   round-trips.
 - Pagination and incremental retrieval: Supports efficient list pagination using
-  `from_entity_id` and `limit`, suitable for large federations.
+  `from` and `limit`, suitable for large federations.
 - Reduced coupling to resolution: Provides a lightweight, list-oriented surface
   distinct from the Resolve and Fetch flows, allowing clients to defer
   resolution and full trust validation until a concrete Entity is selected.
@@ -95,13 +95,17 @@ Federation Entities publishing this endpoint SHOULD also publish a
 `federation_resolve_endpoint`.
 
 ## Pagination
-The endpoint supports a pagination mechanism that is in line with the pagination
-mechanism of the [@!OpenID.FederationExtendedSubordinateListing]. All
-consideration of section 3.1 of [@!OpenID.FederationExtendedSubordinateListing]
-apply, in particular it is noted that a responder implementing pagination MUST ensure consistent
-ordering is implemented across all returned responses. No recommendation is made
-on which key the ordering is based upon and is left up to the choice of
-implementations.
+By segmenting the data into pages, the endpoint facilitates the efficient transmission and processing of data and also adds to the client's ability to navigate through the information.
+The selected method of pagination offers a mix of consistency and performance characteristics appropriate for the intended use of the endpoint.
+
+### Ordering
+
+As pagination enables consumers of this endpoint to retrieve a subset of the full dataset, the responding Entity MUST ensure consistent ordering is implemented across all returned responses.
+No recommendation is made on which key the ordering is based upon and is left up to the choice of implementing Entities.
+
+### Response Limits
+
+This endpoint defines the limit query parameter, allowing consumers to specify a desired maximum number of Entities returned in a given response set. However, this number may, in some cases, be impractical or not feasible for the issuing Entity to return. To address this, it is RECOMMENDED that implementations define a practical upper limit for the response size that can be served. This defined limit MUST be set to a value that ensures if no limit is specified in a request, or if the implementation deems the requested limit impractical, the response can be returned successfully with all requested additional parameters.
 
 ## Endpoint Location
 
@@ -143,8 +147,8 @@ The following is a non-normative example of an Entity Configuration payload, for
 
 When client authentication is not used, the request to the `federation_collection_endpoint` MUST be an HTTP request using the GET method with the following query parameters, encoded in `application/x-www-form-urlencoded` format:
 
-- **from_entity_id**: (OPTIONAL) If this parameter is present, the resulting list MUST be the subset of the overall ordered response starting from the index of the Entity referenced with this parameter.   
-  If the Entity Identifier in this parameter is not or not longer known to the responder, it MUST use the HTTP status code 404 and the content type `application/json` with the error code `entity_id_not_found`.  
+- **from**: (OPTIONAL) If this parameter is present, the resulting list MUST be the subset of the overall ordered response starting from this pointer. This parameter MUST be copied from the `next` response parameter of a previous request.
+  If the pointer in this parameter is not or not longer known to the responder, it MUST use the HTTP status code 404 and the content type `application/json` with the error code `page_not_found`.  
   If the responder does not support this feature, it MUST use the HTTP status code 400 and the content type `application/json`, with the error code `unsupported_parameter`.
 
 - **limit**: (OPTIONAL) Requested number of results included in the response.
@@ -207,9 +211,10 @@ The claims in the entity collection response are:
 Federation Entity as described in [Entity Info](#entity-info). The list of Entities MUST
 only contain Entities that are in line with the requested parameters. The
 responder MAY also filter down the list further at its own discretion.
-- **next_entity_id**: (OPTIONAL) Entity Identifier for the next element in the
-result list where the next page begins. This attribute is REQUIRED when
-additional results are available beyond those included in the `entities` array.
+- **next**: (OPTIONAL) An opaque pointer to the next page in the
+result list. This attribute is REQUIRED when additional results are available
+beyond those included in the `entities` array. To content of this attribute is
+entirely up to the responder and its pagination implementation strategy.
 - **last_updated**: (RECOMMENDED) Number. Time when the responder last updated the result list. This is expressed as Seconds Since the Epoch, per [@!RFC7519]. If the `last_updated` time changes between paginated calls, this might be an indication for the client that it might have received outdated information in a previous call. 
 
 Additional claims MAY be defined and used in conjunction with the claims above.
