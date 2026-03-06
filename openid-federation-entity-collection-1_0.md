@@ -42,6 +42,8 @@ administrative views. To support such use cases, responses MAY include user
 interface–oriented information (for example, display names, logos, and
 descriptions) and the endpoint MAY support filtering (for example, by entity
 type, trust mark type, or query text), as defined in this specification.
+Usage of the endpoint for other use cases that require a list of entities in a
+federation is possible.
 
 Information returned by this endpoint is informational. It is intended to
 facilitate presentation and efficient narrowing of the result set. It does not
