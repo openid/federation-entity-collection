@@ -494,6 +494,10 @@ specification.
 
 We would like to thank the following individuals for their contributions to this specification:
 Niels van Dijk,
+Michael Fraser,
+Łukasz Jaromin,
+Michael B. Jones,
+Giuseppe De Marco,
 Stefan Santesson,
 Phil Smart,
 Zacharias Törnblom,
