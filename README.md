@@ -6,10 +6,10 @@ This specification acts as an extension to OpenID Federation 1.0 and defines an 
 ## Builds
 
 The latest editors' draft can be viewed at
-https://zachmann.github.io/openid-federation-entity-collection/main.html
+https://openid.github.io/federation-entity-collection/main.html
 
 Branches can be viewed at
-https://zachmann.github.io/openid-federation-entity-collection/{BRANCH-NAME}.html
+https://openid.github.io/federation-entity-collection/{BRANCH-NAME}.html
 
 ## Build the HTML ##
 
