@@ -427,7 +427,7 @@ and clients MUST consider them as not yet verified.
         <author fullname="Vladimir Dzhuvinov">
             <organization>Connect2id</organization>
         </author>
-        <date day="24" month="October" year="2024"/>
+        <date day="17" month="February" year="2026"/>
     </front>
 </reference>
 
@@ -452,7 +452,7 @@ and clients MUST consider them as not yet verified.
 
 # Notices
 
-Copyright (c) 2025 The OpenID Foundation.
+Copyright (c) 2026 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer,
 implementer, or other interested party a non-exclusive, royalty free,
