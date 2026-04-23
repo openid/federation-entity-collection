@@ -263,7 +263,7 @@ Additional Claims MAY be defined and used in conjunction with the Claims above.
 
 ```json
 {
-  "federation_entities": [
+  "entities": [
     {
       "entity_id": "https://green.example.com",
       "entity_types": [
