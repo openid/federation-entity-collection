@@ -170,7 +170,7 @@ If the responder does not support this feature, it MUST use the HTTP status code
 filter down the list of returned Entities to only entities that match this
 parameter value. It is entirely up to the responder to define when an Entity
 matches the query.  
-If the responder does not support this feature, it SHOULD use the HTTP status code 400 and the content type `application/json`, with the error code `unsupported_parameter`.
+If the responder does not support this feature, it MUST use the HTTP status code 400 and the content type `application/json`, with the error code `unsupported_parameter`.
 
 -	**entity_claims**: (OPTIONAL) Array of claims to be included in the Entity Info Object included in the response for each collected Entity.  
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
@@ -367,14 +367,14 @@ such as, but not limited to:
 
 # Security Considerations
 
-In additional to the considerations below, the security considerations of
+In addition to the considerations below, the security considerations of
 OpenID Federation 1.0 [@!OpenID.Federation] apply to this specification.
 
 ## Unsigned Response
 
 The response from the Entity Collection Endpoint is not signed and the obtained
 information MUST be considered as informational.
-To verify an Entity proper trust validation according to OpenID Federation 1.0 [@!OpenID.Federation]
+To verify an Entity, proper trust validation according to OpenID Federation 1.0 [@!OpenID.Federation]
 still MUST be done.
 
 It is also noted that Trust Marks returned in the response MAY not be verified
@@ -495,6 +495,7 @@ specification.
 We would like to thank the following individuals for their contributions to this specification:
 Niels van Dijk,
 Michael Fraser,
+Marko Ivančić,
 Łukasz Jaromin,
 Michael B. Jones,
 Giuseppe De Marco,
