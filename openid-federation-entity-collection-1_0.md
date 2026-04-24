@@ -495,6 +495,7 @@ specification.
 We would like to thank the following individuals for their contributions to this specification:
 Niels van Dijk,
 Michael Fraser,
+Marko Ivančić,
 Łukasz Jaromin,
 Michael B. Jones,
 Giuseppe De Marco,
