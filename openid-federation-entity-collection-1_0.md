@@ -367,7 +367,7 @@ such as, but not limited to:
 
 # Security Considerations
 
-In additional to the considerations below, the security considerations of
+In addition to the considerations below, the security considerations of
 OpenID Federation 1.0 [@!OpenID.Federation] apply to this specification.
 
 ## Unsigned Response
