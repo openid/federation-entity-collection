@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">individual</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04-23" class="published">23 April 2026</time>
+<time datetime="2026-04-24" class="published">24 April 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1530,7 +1530,7 @@ If the responder does not support this feature, it MUST use the HTTP status code
 filter down the list of returned Entities to only entities that match this
 parameter value. It is entirely up to the responder to define when an Entity
 matches the query.<br>
-If the responder does not support this feature, it SHOULD use the HTTP status code 400 and the content type <code>application/json</code>, with the error code <code>unsupported_parameter</code>.<a href="#section-3.3.1-2.6.1" class="pilcrow">¶</a></p>
+If the responder does not support this feature, it MUST use the HTTP status code 400 and the content type <code>application/json</code>, with the error code <code>unsupported_parameter</code>.<a href="#section-3.3.1-2.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.7">
               <p id="section-3.3.1-2.7.1"><strong>entity_claims</strong>: (OPTIONAL) Array of claims to be included in the Entity Info Object included in the response for each collected Entity.<br>
@@ -1824,7 +1824,7 @@ providing the Entity Collection Endpoint.<a href="#section-5.3-2.2.2.3" class="p
       <h2 id="name-security-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-6-1">In additional to the considerations below, the security considerations of
+<p id="section-6-1">In addition to the considerations below, the security considerations of
 OpenID Federation 1.0 <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> apply to this specification.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div id="unsigned-response">
 <section id="section-6.1">
@@ -1833,7 +1833,7 @@ OpenID Federation 1.0 <span>[<a href="#OpenID.Federation" class="cite xref">Open
         </h3>
 <p id="section-6.1-1">The response from the Entity Collection Endpoint is not signed and the obtained
 information MUST be considered as informational.
-To verify an Entity proper trust validation according to OpenID Federation 1.0 <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>
+To verify an Entity, proper trust validation according to OpenID Federation 1.0 <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>
 still MUST be done.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">It is also noted that Trust Marks returned in the response MAY not be verified
 and clients MUST consider them as not yet verified.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
@@ -1926,6 +1926,7 @@ specification.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">We would like to thank the following individuals for their contributions to this specification:
 Niels van Dijk,
 Michael Fraser,
+Marko Ivančić,
 Łukasz Jaromin,
 Michael B. Jones,
 Giuseppe De Marco,
