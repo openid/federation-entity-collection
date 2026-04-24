@@ -374,7 +374,7 @@ OpenID Federation 1.0 [@!OpenID.Federation] apply to this specification.
 
 The response from the Entity Collection Endpoint is not signed and the obtained
 information MUST be considered as informational.
-To verify an Entity proper trust validation according to OpenID Federation 1.0 [@!OpenID.Federation]
+To verify an Entity, proper trust validation according to OpenID Federation 1.0 [@!OpenID.Federation]
 still MUST be done.
 
 It is also noted that Trust Marks returned in the response MAY not be verified
