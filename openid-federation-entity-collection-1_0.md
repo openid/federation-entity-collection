@@ -170,7 +170,7 @@ If the responder does not support this feature, it MUST use the HTTP status code
 filter down the list of returned Entities to only entities that match this
 parameter value. It is entirely up to the responder to define when an Entity
 matches the query.  
-If the responder does not support this feature, it SHOULD use the HTTP status code 400 and the content type `application/json`, with the error code `unsupported_parameter`.
+If the responder does not support this feature, it MUST use the HTTP status code 400 and the content type `application/json`, with the error code `unsupported_parameter`.
 
 -	**entity_claims**: (OPTIONAL) Array of claims to be included in the Entity Info Object included in the response for each collected Entity.  
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
