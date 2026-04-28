@@ -1,5 +1,5 @@
 %%%
-title = "OpenID Federation Entity Collection Endpoint 1.0 - draft 00"
+title = "OpenID Federation Entity Collection Endpoint 1.0 - draft 01"
 abbrev = "openid-federation-entity-collection"
 ipr = "none"
 workgroup = "OpenID Connect Working Group"
@@ -211,7 +211,7 @@ responder MAY also filter down the list further at its own discretion.
 result list. This attribute is REQUIRED when additional results are available
 beyond those included in the `entities` array. To content of this attribute is
 entirely up to the responder and its pagination implementation strategy.
-- **last_updated**: (RECOMMENDED) Number. Time when the responder last updated the result list. This is expressed as Seconds Since the Epoch, per [@!RFC7519]. If the `last_updated` time changes between paginated calls, this might be an indication for the client that it might have received outdated information in a previous call. 
+- **last_updated**: (RECOMMENDED) Number. Time when the responder last traversed or refreshed its federation entity collection. This is expressed as Seconds Since the Epoch, per [@!RFC7519]. If the `last_updated` time changes between paginated calls, this might be an indication for the client that the underlying data may have changed since a previous call. 
 
 Additional claims MAY be defined and used in conjunction with the claims above.
 
@@ -533,6 +533,10 @@ and the Geant Trust & Identity Incubator of Geant5-2.
 # Document History
 
 [[ To be removed from the final specification ]]
+
+-01
+
+* Clarified the description of the `last_updated` response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.
 
 -00
 
