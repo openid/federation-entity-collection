@@ -2,7 +2,7 @@
 title = "OpenID Federation Entity Collection Endpoint 1.0 - draft 00"
 abbrev = "openid-federation-entity-collection"
 ipr = "none"
-workgroup = "individual"
+workgroup = "OpenID Connect Working Group"
 keyword = ["security", "openid", "federation"]
 
 [seriesInfo]
