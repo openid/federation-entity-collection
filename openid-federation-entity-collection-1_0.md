@@ -150,37 +150,37 @@ The following is a non-normative example of an Entity Configuration payload, for
 When client authentication is not used, the request to the `federation_collection_endpoint` MUST be an HTTP request using the GET method with the following query parameters, encoded in `application/x-www-form-urlencoded` format:
 
 - **from**: (OPTIONAL) If this parameter is present, the resulting list MUST be the subset of the overall ordered response starting from this pointer. This parameter MUST be copied from the `next` response parameter of a previous request.
-  If the pointer in this parameter is not or not longer known to the responder, it MUST use the HTTP status code 404 and the content type `application/json` with the error code `page_not_found`.  
-  If the responder does not support this feature, it MUST use the HTTP status code 400 and the content type `application/json`, with the error code `unsupported_parameter`.
+  If the pointer in this parameter is not or not longer known to the responder, it MUST return an error response with the error code `page_not_found` as defined in [Error Response Format](#error-response-format).  
+  If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 - **limit**: (OPTIONAL) Requested number of results included in the response.
-If this parameter is present, the number of results in the returned list MUST NOT be greater than the minimum of the responder’s upper limit and the value of this parameter.
+If this parameter is present, the number of results in the returned list MUST NOT be greater than the minimum of the responder's upper limit and the value of this parameter.
 If this parameter is not present the server MUST fall back on the upper limit.  
-  If the responder does not support this feature, it MUST use the HTTP status code 400 and the content type `application/json`, with the error code `unsupported_parameter`.
+  If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
   
 - **entity_type**: (OPTIONAL) The value of this parameter is an Entity Type Identifier. The result MUST be filtered to include only those entities that include the specified Entity Type. When multiple `entity_type` parameters are present, for example `entity_type=openid_provider&entity_type=openid_relying_party`, the result MUST be filtered to include all Entities that include any of the specified Entity Types. 
-If the responder does not support this feature, it MUST use the HTTP status code 400 and the content type `application/json`, with the error code `unsupported_parameter`.
+If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 - **trust_mark_type**: (OPTIONAL) The value of this parameter is a Trust Mark Type Identifier. The result MUST be filtered to include only Entities that publish a Trust Mark of this Trust Mark Type in their Entity Configuration and that Trust Mark MUST be verified by the responder. The responder SHOULD verify the Trust Mark using the same Trust Anchor that is used to collect the Entities. When multiple `trust_mark_type` parameters are present, the result MUST be filtered to include only Entities that have a Trust Mark for all the specified Trust Mark Types.  
-If the responder does not support this feature, it MUST use the HTTP status code 400 and set the content type to `application/json`, with the error code `unsupported_parameter`.
+If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
-- **trust_anchor**: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If the responder does not have a defined Entity Identifier, it MUST use the HTTP status code 400 and set the content type to `application/json`, with the error code `invalid_request`.
+- **trust_anchor**: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If the responder does not have a defined Entity Identifier, it MUST return an error response with the error code `invalid_request` as defined in [Error Response Format](#error-response-format).
 
 - **query**: (OPTIONAL) The value of this parameter is used by the responder to
 filter down the list of returned Entities to only entities that match this
 parameter value. It is entirely up to the responder to define when an Entity
 matches the query.  
-If the responder does not support this feature, it MUST use the HTTP status code 400 and the content type `application/json`, with the error code `unsupported_parameter`.
+If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 -	**entity_claims**: (OPTIONAL) Array of claims to be included in the Entity Info Object included in the response for each collected Entity.  
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
 If this parameter is present and it is NOT an empty array, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Also Claims that are optional to return and not present in the array MUST NOT be included in the Entity Info.  
-If the responder does not support a requested claim, it MUST use the HTTP status code 400 and set the content type to `application/json`, with the error code `unsupported_parameter`.
+If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 -	**ui_claims**: (OPTIONAL) Array of claims to be included in the Entity Type UI Info Object included in the response for each returned Entity.  
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
 If this parameter is present and it is NOT an empty array, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type.  
-If the responder does not support a requested claim, it MUST use the HTTP status code 400 and set the content type to `application/json`, with the error code `unsupported_parameter`.
+If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 
 
@@ -201,13 +201,7 @@ Host: openid.sunet.se
 
 A successful response MUST use the HTTP status code 200 and the content type `application/json`. 
 
-The response is a JSON object as described below.
-
-If the response is negative, it will be a JSON object and the content type MUST be `application/json` and use the errors defined here or in [@!OpenID.Federation].
-
-### Response Claims
-
-The claims in the entity collection response are:
+The response is a JSON object with the following claims:
 
 - **entities**: (REQUIRED) Array of JSON objects, each representing a
 Federation Entity as described in [Entity Info](#entity-info). The list of Entities MUST
@@ -300,6 +294,30 @@ Additional Claims MAY be defined and used in conjunction with the Claims above.
       ]
     }
   ]
+}
+```
+
+### Error Response Format
+
+If the request was malformed or an error occurred during the processing of the request, the response body MUST be a JSON object with the content type `application/json`. In compliance with [@!RFC6749] and [@!OpenID.Federation], the following standardized error format MUST be used:
+
+- **error**: (REQUIRED) Error codes in the IANA "OAuth Extensions Error Registry" [@!IANA.OAuth.Parameters] MAY be used. In particular, these existing error codes are used by this specification:
+  - **unsupported_parameter**: The server does not support a requested parameter. The HTTP response status code SHOULD be 400 (Bad Request).
+   - **invalid_request**: The request is incomplete or does not comply with current specifications. The HTTP response status code SHOULD be 400 (Bad Request).  
+     <br/>
+     In addition the following error codes defined by this specification MAY be used:
+  - **page_not_found**: The pagination pointer provided in the `from` parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).
+- **error_description**: (REQUIRED) Human-readable text providing additional information used to assist the developer in understanding the error that occurred.
+
+The following is a non-normative example of an error response:
+
+```http
+400 Bad Request
+Content-Type: application/json
+
+{
+  "error": "unsupported_parameter",
+  "error_description": "The 'limit' parameter is not supported by this endpoint."
 }
 ```
 
@@ -447,6 +465,15 @@ and clients MUST consider them as not yet verified.
             <organization>Self-Issued Consulting</organization>
         </author>
         <date day="27" month="April" year="2025"/>
+    </front>
+</reference>
+
+<reference anchor="IANA.OAuth.Parameters" target="https://www.iana.org/assignments/oauth-parameters">
+    <front>
+        <title>OAuth Parameters</title>
+        <author fullname="IANA">
+        </author>
+        <date day="25" month="March" year="2026"/>
     </front>
 </reference>
 
