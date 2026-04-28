@@ -1,5 +1,5 @@
 %%%
-title = "OpenID Federation Entity Collection Endpoint 1.0 - draft 00"
+title = "OpenID Federation Entity Collection Endpoint 1.0 - draft 01"
 abbrev = "openid-federation-entity-collection"
 ipr = "none"
 workgroup = "OpenID Connect Working Group"
@@ -534,6 +534,10 @@ and the Geant Trust & Identity Incubator of Geant5-2.
 # Document History
 
 [[ To be removed from the final specification ]]
+
+-01
+
+* Clarified the description of the `last_updated` response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.
 
 -00
 
