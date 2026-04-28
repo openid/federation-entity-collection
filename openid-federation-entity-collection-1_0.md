@@ -537,6 +537,7 @@ and the Geant Trust & Identity Incubator of Geant5-2.
 -01
 
 * Clarified the description of the `last_updated` response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.
+* Make the `trust_anchor` parameter REQUIRED.
 
 -00
 
