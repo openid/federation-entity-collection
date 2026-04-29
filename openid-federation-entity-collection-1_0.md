@@ -172,15 +172,17 @@ parameter value. It is entirely up to the responder to define when an Entity
 matches the query.  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
--	**entity_claims**: (OPTIONAL) Array of claims to be included in the Entity Info Object included in the response for each collected Entity.  
+-	**entity_claims**: (OPTIONAL) Claims to be included in the Entity Info Object included in the response for each collected Entity. All claims defined in [Entity Info](#entity-info) MAY be requested. This parameter can be specified multiple times to request multiple claims.  
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
-If this parameter is present and it is NOT an empty array, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Also Claims that are optional to return and not present in the array MUST NOT be included in the Entity Info.  
-If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
+If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Also Claims that are optional to return and not specified MUST NOT be included in the Entity Info.  
+If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).  
+If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_claim` as defined in [Error Response Format](#error-response-format).
 
--	**ui_claims**: (OPTIONAL) Array of claims to be included in the Entity Type UI Info Object included in the response for each returned Entity.  
+-	**ui_claims**: (OPTIONAL) Claims to be included in the Entity Type UI Info Object included in the response for each returned Entity. All claims defined in [Entity Type UI Info](#entity-type-ui-info) MAY be requested. This parameter can be specified multiple times to request multiple claims.  
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
-If this parameter is present and it is NOT an empty array, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type.  
-If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
+If this parameter is present, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type.  
+If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).  
+If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_claim` as defined in [Error Response Format](#error-response-format).
 
 
 
@@ -297,6 +299,80 @@ Additional Claims MAY be defined and used in conjunction with the Claims above.
 }
 ```
 
+The following is a non-normative example of a collection request with the `entity_claims` parameter specified multiple times:
+
+```http
+GET /collection?entity_type=openid_provider&entity_claims=entity_types&entity_claims=trust_marks HTTP/1.1
+Host: openid.sunet.se
+```
+
+The following is a non-normative example of a response to the request above, showing only the requested claims in each Entity Info Object:
+
+```json
+{
+  "entities": [
+    {
+      "entity_id": "https://op1.example.com",
+      "entity_types": [
+        "openid_provider"
+      ],
+      "trust_marks": [
+        {
+          "trust_mark": "eyJhbGciOiJSUzI1NiIsInR5cCI6InRydXN0LW1hcmsranV3dCJ9...",
+          "trust_mark_id": "https://www.swamid.se/policy/sirtfi/refeds-sirtfi-framework"
+        }
+      ]
+    },
+    {
+      "entity_id": "https://op2.example.com",
+      "entity_types": [
+        "openid_provider"
+      ]
+    }
+  ]
+}
+```
+
+The following is a non-normative example of a collection request with the `ui_claims` parameter specified multiple times:
+
+```http
+GET /collection?entity_type=openid_provider&ui_claims=display_name&ui_claims=logo_uri HTTP/1.1
+Host: openid.sunet.se
+```
+
+The following is a non-normative example of a response to the request above, showing only the requested UI claims in each Entity Info Object:
+
+```json
+{
+  "entities": [
+    {
+      "entity_id": "https://op1.example.com",
+      "entity_types": [
+        "openid_provider"
+      ],
+      "ui_infos": {
+        "openid_provider": {
+          "display_name": "Example University OP",
+          "logo_uri": "https://op1.example.com/logo.png"
+        }
+      }
+    },
+    {
+      "entity_id": "https://op2.example.com",
+      "entity_types": [
+        "openid_provider"
+      ],
+      "ui_infos": {
+        "openid_provider": {
+          "display_name": "Another University OP",
+          "logo_uri": "https://op2.example.com/logo.png"
+        }
+      }
+    }
+  ]
+}
+```
+
 ### Error Response Format
 
 If the request was malformed or an error occurred during the processing of the request, the response body MUST be a JSON object with the content type `application/json`. In compliance with [@!RFC6749] and [@!OpenID.Federation], the following standardized error format MUST be used:
@@ -304,6 +380,7 @@ If the request was malformed or an error occurred during the processing of the r
 - **error**: (REQUIRED) Error codes in the IANA "OAuth Extensions Error Registry" [@!IANA.OAuth.Parameters] MAY be used. In particular, these existing error codes are used by this specification:
   - **unsupported_parameter**: The server does not support a requested parameter. The HTTP response status code SHOULD be 400 (Bad Request).
    - **invalid_request**: The request is incomplete or does not comply with current specifications. The HTTP response status code SHOULD be 400 (Bad Request).  
+   - **unsupported_claim**: The server does not support a specific requested claim in the `entity_claims` or `ui_claims` parameter. The HTTP response status code SHOULD be 400 (Bad Request).  
      <br/>
      In addition the following error codes defined by this specification MAY be used:
   - **page_not_found**: The pagination pointer provided in the `from` parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).
@@ -538,6 +615,9 @@ and the Geant Trust & Identity Incubator of Geant5-2.
 -01
 
 * Clarified the description of the `last_updated` response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.
+* Added references to Entity Info and Entity Type UI Info sections in `entity_claims` and `ui_claims` parameter descriptions.
+* Added `unsupported_claim` error code for unsupported claims in `entity_claims` and `ui_claims` parameters.
+* Added examples demonstrating `entity_claims` and `ui_claims` parameter usage.
 
 -00
 
