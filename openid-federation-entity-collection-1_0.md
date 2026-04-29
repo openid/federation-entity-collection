@@ -326,7 +326,7 @@ Content-Type: application/json
 
 ## Examples
 
-The following are non-normative examples demonstrating the use of the `entity_claims` and `ui_claims` parameters.
+The following are non-normative examples for the Entity Collection Endpoint.
 
 ### Example Request with `entity_claims`
 
