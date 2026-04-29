@@ -299,12 +299,45 @@ Additional Claims MAY be defined and used in conjunction with the Claims above.
 }
 ```
 
+### Error Response Format
+
+If the request was malformed or an error occurred during the processing of the request, the response body MUST be a JSON object with the content type `application/json`. In compliance with [@!RFC6749] and [@!OpenID.Federation], the following standardized error format MUST be used:
+
+- **error**: (REQUIRED) Error codes in the IANA "OAuth Extensions Error Registry" [@!IANA.OAuth.Parameters] MAY be used. In particular, these existing error codes are used by this specification:
+  - **unsupported_parameter**: The server does not support a requested parameter. The HTTP response status code SHOULD be 400 (Bad Request).
+   - **invalid_request**: The request is incomplete or does not comply with current specifications. The HTTP response status code SHOULD be 400 (Bad Request).  
+   - **unsupported_claim**: The server does not support a specific requested claim in the `entity_claims` or `ui_claims` parameter. The HTTP response status code SHOULD be 400 (Bad Request).  
+     <br/>
+     In addition the following error codes defined by this specification MAY be used:
+  - **page_not_found**: The pagination pointer provided in the `from` parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).
+- **error_description**: (REQUIRED) Human-readable text providing additional information used to assist the developer in understanding the error that occurred.
+
+The following is a non-normative example of an error response:
+
+```http
+400 Bad Request
+Content-Type: application/json
+
+{
+  "error": "unsupported_parameter",
+  "error_description": "The 'limit' parameter is not supported by this endpoint."
+}
+```
+
+## Examples
+
+The following are non-normative examples demonstrating the use of the `entity_claims` and `ui_claims` parameters.
+
+### Example Request with `entity_claims`
+
 The following is a non-normative example of a collection request with the `entity_claims` parameter specified multiple times:
 
 ```http
 GET /collection?entity_type=openid_provider&entity_claims=entity_types&entity_claims=trust_marks HTTP/1.1
 Host: openid.sunet.se
 ```
+
+### Example Response with `entity_claims`
 
 The following is a non-normative example of a response to the request above, showing only the requested claims in each Entity Info Object:
 
@@ -333,12 +366,16 @@ The following is a non-normative example of a response to the request above, sho
 }
 ```
 
+### Example Request with `ui_claims`
+
 The following is a non-normative example of a collection request with the `ui_claims` parameter specified multiple times:
 
 ```http
 GET /collection?entity_type=openid_provider&ui_claims=display_name&ui_claims=logo_uri HTTP/1.1
 Host: openid.sunet.se
 ```
+
+### Example Response with `ui_claims`
 
 The following is a non-normative example of a response to the request above, showing only the requested UI claims in each Entity Info Object:
 
@@ -370,31 +407,6 @@ The following is a non-normative example of a response to the request above, sho
       }
     }
   ]
-}
-```
-
-### Error Response Format
-
-If the request was malformed or an error occurred during the processing of the request, the response body MUST be a JSON object with the content type `application/json`. In compliance with [@!RFC6749] and [@!OpenID.Federation], the following standardized error format MUST be used:
-
-- **error**: (REQUIRED) Error codes in the IANA "OAuth Extensions Error Registry" [@!IANA.OAuth.Parameters] MAY be used. In particular, these existing error codes are used by this specification:
-  - **unsupported_parameter**: The server does not support a requested parameter. The HTTP response status code SHOULD be 400 (Bad Request).
-   - **invalid_request**: The request is incomplete or does not comply with current specifications. The HTTP response status code SHOULD be 400 (Bad Request).  
-   - **unsupported_claim**: The server does not support a specific requested claim in the `entity_claims` or `ui_claims` parameter. The HTTP response status code SHOULD be 400 (Bad Request).  
-     <br/>
-     In addition the following error codes defined by this specification MAY be used:
-  - **page_not_found**: The pagination pointer provided in the `from` parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).
-- **error_description**: (REQUIRED) Human-readable text providing additional information used to assist the developer in understanding the error that occurred.
-
-The following is a non-normative example of an error response:
-
-```http
-400 Bad Request
-Content-Type: application/json
-
-{
-  "error": "unsupported_parameter",
-  "error_description": "The 'limit' parameter is not supported by this endpoint."
 }
 ```
 
