@@ -1292,6 +1292,23 @@ li > p:last-of-type:only-child {
 </li>
                 </ul>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.1">
+                    <p id="section-toc.1-1.3.2.5.2.1.1"><a href="#section-3.5.1" class="auto internal xref">3.5.1</a>.  <a href="#name-example-request-with-entity" class="internal xref">Example Request with <code>entity_claims</code></a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.2">
+                    <p id="section-toc.1-1.3.2.5.2.2.1"><a href="#section-3.5.2" class="auto internal xref">3.5.2</a>.  <a href="#name-example-response-with-entit" class="internal xref">Example Response with <code>entity_claims</code></a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.3">
+                    <p id="section-toc.1-1.3.2.5.2.3.1"><a href="#section-3.5.3" class="auto internal xref">3.5.3</a>.  <a href="#name-example-request-with-ui_cla" class="internal xref">Example Request with <code>ui_claims</code></a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.4">
+                    <p id="section-toc.1-1.3.2.5.2.4.1"><a href="#section-3.5.4" class="auto internal xref">3.5.4</a>.  <a href="#name-example-response-with-ui_cl" class="internal xref">Example Response with <code>ui_claims</code></a></p>
+</li>
+                </ul>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
@@ -1696,76 +1713,6 @@ single Entity Type of an Entity.<a href="#section-3.4.1.1.1.1-1" class="pilcrow"
 }
 </pre><a href="#section-3.4.1.2-1" class="pilcrow">¶</a>
 </div>
-<p id="section-3.4.1.2-2">The following is a non-normative example of a collection request with the <code>entity_claims</code> parameter specified multiple times:<a href="#section-3.4.1.2-2" class="pilcrow">¶</a></p>
-<div class="lang-http sourcecode" id="section-3.4.1.2-3">
-<pre>GET /collection?entity_type=openid_provider&amp;entity_claims=entity_types&amp;entity_claims=trust_marks HTTP/1.1
-Host: openid.sunet.se
-</pre><a href="#section-3.4.1.2-3" class="pilcrow">¶</a>
-</div>
-<p id="section-3.4.1.2-4">The following is a non-normative example of a response to the request above, showing only the requested claims in each Entity Info Object:<a href="#section-3.4.1.2-4" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-3.4.1.2-5">
-<pre>{
-  "entities": [
-    {
-      "entity_id": "https://op1.example.com",
-      "entity_types": [
-        "openid_provider"
-      ],
-      "trust_marks": [
-        {
-          "trust_mark": "eyJhbGciOiJSUzI1NiIsInR5cCI6InRydXN0LW1hcmsranV3dCJ9...",
-          "trust_mark_id": "https://www.swamid.se/policy/sirtfi/refeds-sirtfi-framework"
-        }
-      ]
-    },
-    {
-      "entity_id": "https://op2.example.com",
-      "entity_types": [
-        "openid_provider"
-      ]
-    }
-  ]
-}
-</pre><a href="#section-3.4.1.2-5" class="pilcrow">¶</a>
-</div>
-<p id="section-3.4.1.2-6">The following is a non-normative example of a collection request with the <code>ui_claims</code> parameter specified multiple times:<a href="#section-3.4.1.2-6" class="pilcrow">¶</a></p>
-<div class="lang-http sourcecode" id="section-3.4.1.2-7">
-<pre>GET /collection?entity_type=openid_provider&amp;ui_claims=display_name&amp;ui_claims=logo_uri HTTP/1.1
-Host: openid.sunet.se
-</pre><a href="#section-3.4.1.2-7" class="pilcrow">¶</a>
-</div>
-<p id="section-3.4.1.2-8">The following is a non-normative example of a response to the request above, showing only the requested UI claims in each Entity Info Object:<a href="#section-3.4.1.2-8" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-3.4.1.2-9">
-<pre>{
-  "entities": [
-    {
-      "entity_id": "https://op1.example.com",
-      "entity_types": [
-        "openid_provider"
-      ],
-      "ui_infos": {
-        "openid_provider": {
-          "display_name": "Example University OP",
-          "logo_uri": "https://op1.example.com/logo.png"
-        }
-      }
-    },
-    {
-      "entity_id": "https://op2.example.com",
-      "entity_types": [
-        "openid_provider"
-      ],
-      "ui_infos": {
-        "openid_provider": {
-          "display_name": "Another University OP",
-          "logo_uri": "https://op2.example.com/logo.png"
-        }
-      }
-    }
-  ]
-}
-</pre><a href="#section-3.4.1.2-9" class="pilcrow">¶</a>
-</div>
 </section>
 </div>
 </section>
@@ -1811,6 +1758,112 @@ Content-Type: application/json
   "error_description": "The 'limit' parameter is not supported by this endpoint."
 }
 </pre><a href="#section-3.4.2-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="examples">
+<section id="section-3.5">
+        <h3 id="name-examples">
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
+        </h3>
+<p id="section-3.5-1">The following are non-normative examples demonstrating the use of the <code>entity_claims</code> and <code>ui_claims</code> parameters.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<div id="example-request-with-entity-claims">
+<section id="section-3.5.1">
+          <h4 id="name-example-request-with-entity">
+<a href="#section-3.5.1" class="section-number selfRef">3.5.1. </a><a href="#name-example-request-with-entity" class="section-name selfRef">Example Request with <code>entity_claims</code></a>
+          </h4>
+<p id="section-3.5.1-1">The following is a non-normative example of a collection request with the <code>entity_claims</code> parameter specified multiple times:<a href="#section-3.5.1-1" class="pilcrow">¶</a></p>
+<div class="lang-http sourcecode" id="section-3.5.1-2">
+<pre>GET /collection?entity_type=openid_provider&amp;entity_claims=entity_types&amp;entity_claims=trust_marks HTTP/1.1
+Host: openid.sunet.se
+</pre><a href="#section-3.5.1-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="example-response-with-entity-claims">
+<section id="section-3.5.2">
+          <h4 id="name-example-response-with-entit">
+<a href="#section-3.5.2" class="section-number selfRef">3.5.2. </a><a href="#name-example-response-with-entit" class="section-name selfRef">Example Response with <code>entity_claims</code></a>
+          </h4>
+<p id="section-3.5.2-1">The following is a non-normative example of a response to the request above, showing only the requested claims in each Entity Info Object:<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-3.5.2-2">
+<pre>{
+  "entities": [
+    {
+      "entity_id": "https://op1.example.com",
+      "entity_types": [
+        "openid_provider"
+      ],
+      "trust_marks": [
+        {
+          "trust_mark": "eyJhbGciOiJSUzI1NiIsInR5cCI6InRydXN0LW1hcmsranV3dCJ9...",
+          "trust_mark_id": "https://www.swamid.se/policy/sirtfi/refeds-sirtfi-framework"
+        }
+      ]
+    },
+    {
+      "entity_id": "https://op2.example.com",
+      "entity_types": [
+        "openid_provider"
+      ]
+    }
+  ]
+}
+</pre><a href="#section-3.5.2-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="example-request-with-ui-claims">
+<section id="section-3.5.3">
+          <h4 id="name-example-request-with-ui_cla">
+<a href="#section-3.5.3" class="section-number selfRef">3.5.3. </a><a href="#name-example-request-with-ui_cla" class="section-name selfRef">Example Request with <code>ui_claims</code></a>
+          </h4>
+<p id="section-3.5.3-1">The following is a non-normative example of a collection request with the <code>ui_claims</code> parameter specified multiple times:<a href="#section-3.5.3-1" class="pilcrow">¶</a></p>
+<div class="lang-http sourcecode" id="section-3.5.3-2">
+<pre>GET /collection?entity_type=openid_provider&amp;ui_claims=display_name&amp;ui_claims=logo_uri HTTP/1.1
+Host: openid.sunet.se
+</pre><a href="#section-3.5.3-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="example-response-with-ui-claims">
+<section id="section-3.5.4">
+          <h4 id="name-example-response-with-ui_cl">
+<a href="#section-3.5.4" class="section-number selfRef">3.5.4. </a><a href="#name-example-response-with-ui_cl" class="section-name selfRef">Example Response with <code>ui_claims</code></a>
+          </h4>
+<p id="section-3.5.4-1">The following is a non-normative example of a response to the request above, showing only the requested UI claims in each Entity Info Object:<a href="#section-3.5.4-1" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-3.5.4-2">
+<pre>{
+  "entities": [
+    {
+      "entity_id": "https://op1.example.com",
+      "entity_types": [
+        "openid_provider"
+      ],
+      "ui_infos": {
+        "openid_provider": {
+          "display_name": "Example University OP",
+          "logo_uri": "https://op1.example.com/logo.png"
+        }
+      }
+    },
+    {
+      "entity_id": "https://op2.example.com",
+      "entity_types": [
+        "openid_provider"
+      ],
+      "ui_infos": {
+        "openid_provider": {
+          "display_name": "Another University OP",
+          "logo_uri": "https://op2.example.com/logo.png"
+        }
+      }
+    }
+  ]
+}
+</pre><a href="#section-3.5.4-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
