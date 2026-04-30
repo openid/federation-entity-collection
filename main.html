@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04-28" class="published">28 April 2026</time>
+<time datetime="2026-04-30" class="published">30 April 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1511,7 +1511,7 @@ If the responder does not support this feature, it MUST return an error response
             <li class="normal" id="section-3.3.1-2.2">
               <p id="section-3.3.1-2.2.1"><strong>limit</strong>: (OPTIONAL) Requested number of results included in the response.
 If this parameter is present, the number of results in the returned list MUST NOT be greater than the minimum of the responder's upper limit and the value of this parameter.
-If this parameter is not present the server MUST fall back on the upper limit.<br>
+If this parameter is not present the server MUST fall back on the upper limit, as described in <a href="#response-limits">Response Limits</a>.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.3">
@@ -1981,6 +1981,8 @@ and the Geant Trust &amp; Identity Incubator of Geant5-2.<a href="#appendix-B-1"
 <p id="appendix-C-2">-01<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="appendix-C-3.1">Clarified the description of the <code>last_updated</code> response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.<a href="#appendix-C-3.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.2">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="appendix-C-4">-00<a href="#appendix-C-4" class="pilcrow">¶</a></p>
