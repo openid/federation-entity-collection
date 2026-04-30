@@ -155,7 +155,7 @@ When client authentication is not used, the request to the `federation_collectio
 
 - **limit**: (OPTIONAL) Requested number of results included in the response.
 If this parameter is present, the number of results in the returned list MUST NOT be greater than the minimum of the responder's upper limit and the value of this parameter.
-If this parameter is not present the server MUST fall back on the upper limit.  
+If this parameter is not present the server MUST fall back on the upper limit, as described in [Response Limits](#response-limits).  
   If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
   
 - **entity_type**: (OPTIONAL) The value of this parameter is an Entity Type Identifier. The result MUST be filtered to include only those entities that include the specified Entity Type. When multiple `entity_type` parameters are present, for example `entity_type=openid_provider&entity_type=openid_relying_party`, the result MUST be filtered to include all Entities that include any of the specified Entity Types. 
@@ -538,6 +538,7 @@ and the Geant Trust & Identity Incubator of Geant5-2.
 -01
 
 * Clarified the description of the `last_updated` response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.
+* Clarified the `limit` parameter description by adding a reference to the [Response Limits](#response-limits) section.
 
 -00
 
