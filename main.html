@@ -1523,7 +1523,7 @@ If the responder does not support this feature, it MUST return an error response
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.5">
-              <p id="section-3.3.1-2.5.1"><strong>trust_anchor</strong>: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If the responder does not have a defined Entity Identifier, it MUST return an error response with the error code <code>invalid_request</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.5.1" class="pilcrow">¶</a></p>
+              <p id="section-3.3.1-2.5.1"><strong>trust_anchor</strong>: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If the responder does not have a defined Entity Identifier, it MUST return an error response with the error code <code>invalid_request</code> as defined in <a href="#error-response-format">Error Response Format</a>. If the requested Trust Anchor is not supported by the responder, it MUST return an error response with the error code <code>invalid_trust_anchor</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.6">
               <p id="section-3.3.1-2.6.1"><strong>query</strong>: (OPTIONAL) The value of this parameter is used by the responder to
@@ -1719,6 +1719,9 @@ In addition the following error codes defined by this specification MAY be used:
 </li>
                 <li class="compact" id="section-3.4.2-2.1.2.3">
                   <strong>page_not_found</strong>: The pagination pointer provided in the <code>from</code> parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).<a href="#section-3.4.2-2.1.2.3" class="pilcrow">¶</a>
+</li>
+                <li class="compact" id="section-3.4.2-2.1.2.4">
+                  <strong>invalid_trust_anchor</strong>: The Trust Anchor cannot be found or used. The HTTP response status code SHOULD be 404 (Not Found).<a href="#section-3.4.2-2.1.2.4" class="pilcrow">¶</a>
 </li>
               </ul>
 </li>
@@ -1982,7 +1985,9 @@ and the Geant Trust &amp; Identity Incubator of Geant5-2.<a href="#appendix-B-1"
 <ul class="compact">
 <li class="compact" id="appendix-C-3.1">Clarified the description of the <code>last_updated</code> response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.<a href="#appendix-C-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.2">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.2">Clarified error response if trust_anchor value is not supported.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.3">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="appendix-C-4">-00<a href="#appendix-C-4" class="pilcrow">¶</a></p>
