@@ -174,13 +174,13 @@ If the responder does not support this feature, it MUST return an error response
 
 -	**entity_claims**: (OPTIONAL) Claims to be included in the Entity Info Object included in the response for each collected Entity. All claims defined in [Entity Info](#entity-info) MAY be requested. This parameter can be specified multiple times to request multiple claims.  
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
-If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Also Claims that are optional to return and not specified MUST NOT be included in the Entity Info.  
+If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Claims that are optional to return and not specified MUST NOT be included in the Entity Info.  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).  
 If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_claim` as defined in [Error Response Format](#error-response-format).
 
 -	**ui_claims**: (OPTIONAL) Claims to be included in the Entity Type UI Info Object included in the response for each returned Entity. All claims defined in [Entity Type UI Info](#entity-type-ui-info) MAY be requested. This parameter can be specified multiple times to request multiple claims.  
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
-If this parameter is present, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type.  
+If this parameter is present, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type UI Info.  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).  
 If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_claim` as defined in [Error Response Format](#error-response-format).
 
@@ -305,11 +305,11 @@ If the request was malformed or an error occurred during the processing of the r
 
 - **error**: (REQUIRED) Error codes in the IANA "OAuth Extensions Error Registry" [@!IANA.OAuth.Parameters] MAY be used. In particular, these existing error codes are used by this specification:
   - **unsupported_parameter**: The server does not support a requested parameter. The HTTP response status code SHOULD be 400 (Bad Request).
-   - **invalid_request**: The request is incomplete or does not comply with current specifications. The HTTP response status code SHOULD be 400 (Bad Request).  
-   - **unsupported_claim**: The server does not support a specific requested claim in the `entity_claims` or `ui_claims` parameter. The HTTP response status code SHOULD be 400 (Bad Request).  
+  - **invalid_request**: The request is incomplete or does not comply with current specifications. The HTTP response status code SHOULD be 400 (Bad Request).  
      <br/>
      In addition the following error codes defined by this specification MAY be used:
   - **page_not_found**: The pagination pointer provided in the `from` parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).
+  - **unsupported_claim**: The server does not support a specific requested claim in the `entity_claims` or `ui_claims` parameter. The HTTP response status code SHOULD be 400 (Bad Request).  
 - **error_description**: (REQUIRED) Human-readable text providing additional information used to assist the developer in understanding the error that occurred.
 
 The following is a non-normative example of an error response:
