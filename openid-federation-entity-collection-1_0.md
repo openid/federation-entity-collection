@@ -182,7 +182,8 @@ If this parameter is NOT present it is at the discretion of the responder which 
 If this parameter is present and it is NOT an empty array, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type.  
 If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
-
+- **language_tag**: (OPTIONAL) A language tag according to BCP47 [@!RFC5646]. If provided, UI claims in the response MUST be filtered to include only this language. The default/untagged value (empty language tag) MUST always be included regardless of this parameter. If not provided, all available languages MUST be included. When multiple `language_tag` parameters are present, for example `language_tag=en&language_tag=de`, the result MUST include all language-tagged values matching any of the specified language tags. Language tag matching MUST follow [@!RFC4647] basic filtering semantics, where a parent tag matches more specific subtags (for example, "en" matches "en-US").  
+If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 When Client authentication is used, the request MUST be an HTTP request using the POST method, with the parameters passed in the POST body.
 
@@ -538,6 +539,7 @@ and the Geant Trust & Identity Incubator of Geant5-2.
 
 -01
 
+* Added the `language_tag` request parameter to enable clients to filter UI claims by preferred languages (Issue #38).
 * Clarified the description of the `last_updated` response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.
 * Clarified error response if trust_anchor value is not supported.
 * Clarified the `limit` parameter description by adding a reference to the [Response Limits](#response-limits) section.
