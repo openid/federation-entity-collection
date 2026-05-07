@@ -1205,7 +1205,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">openid-federation-entity-collection</td>
-<td class="right">April 2026</td>
+<td class="right">May 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Zachmann</td>
@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04-29" class="published">29 April 2026</time>
+<time datetime="2026-05-07" class="published">7 May 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1552,14 +1552,14 @@ If the responder does not support this feature, it MUST return an error response
             <li class="normal" id="section-3.3.1-2.7">
               <p id="section-3.3.1-2.7.1"><strong>entity_claims</strong>: (OPTIONAL) Claims to be included in the Entity Info Object included in the response for each collected Entity. All claims defined in <a href="#entity-info">Entity Info</a> MAY be requested. This parameter can be specified multiple times to request multiple claims.<br>
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.<br>
-If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Also Claims that are optional to return and not specified MUST NOT be included in the Entity Info.<br>
+If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Claims that are optional to return and not specified MUST NOT be included in the Entity Info.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<br>
 If the responder does not support a requested claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.7.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.8">
               <p id="section-3.3.1-2.8.1"><strong>ui_claims</strong>: (OPTIONAL) Claims to be included in the Entity Type UI Info Object included in the response for each returned Entity. All claims defined in <a href="#entity-type-ui-info">Entity Type UI Info</a> MAY be requested. This parameter can be specified multiple times to request multiple claims.<br>
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.<br>
-If this parameter is present, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type.<br>
+If this parameter is present, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type UI Info.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<br>
 If the responder does not support a requested claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.8.1" class="pilcrow">¶</a></p>
 </li>
@@ -1731,16 +1731,16 @@ single Entity Type of an Entity.<a href="#section-3.4.1.1.1.1-1" class="pilcrow"
                   <strong>unsupported_parameter</strong>: The server does not support a requested parameter. The HTTP response status code SHOULD be 400 (Bad Request).<a href="#section-3.4.2-2.1.2.1" class="pilcrow">¶</a>
 </li>
                 <li class="compact" id="section-3.4.2-2.1.2.2">
-                  <strong>invalid_request</strong>: The request is incomplete or does not comply with current specifications. The HTTP response status code SHOULD be 400 (Bad Request).<br><a href="#section-3.4.2-2.1.2.2" class="pilcrow">¶</a>
-</li>
-                <li class="compact" id="section-3.4.2-2.1.2.3">
-                  <strong>unsupported_claim</strong>: The server does not support a specific requested claim in the <code>entity_claims</code> or <code>ui_claims</code> parameter. The HTTP response status code SHOULD be 400 (Bad Request).<br>
+                  <strong>invalid_request</strong>: The request is incomplete or does not comply with current specifications. The HTTP response status code SHOULD be 400 (Bad Request).<br>
                   <br>
 
-In addition the following error codes defined by this specification MAY be used:<a href="#section-3.4.2-2.1.2.3" class="pilcrow">¶</a>
+In addition the following error codes defined by this specification MAY be used:<a href="#section-3.4.2-2.1.2.2" class="pilcrow">¶</a>
+</li>
+                <li class="compact" id="section-3.4.2-2.1.2.3">
+                  <strong>page_not_found</strong>: The pagination pointer provided in the <code>from</code> parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).<a href="#section-3.4.2-2.1.2.3" class="pilcrow">¶</a>
 </li>
                 <li class="compact" id="section-3.4.2-2.1.2.4">
-                  <strong>page_not_found</strong>: The pagination pointer provided in the <code>from</code> parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).<a href="#section-3.4.2-2.1.2.4" class="pilcrow">¶</a>
+                  <strong>unsupported_claim</strong>: The server does not support a specific requested claim in the <code>entity_claims</code> or <code>ui_claims</code> parameter. The HTTP response status code SHOULD be 400 (Bad Request).<br><a href="#section-3.4.2-2.1.2.4" class="pilcrow">¶</a>
 </li>
               </ul>
 </li>
