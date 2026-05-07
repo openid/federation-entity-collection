@@ -1205,7 +1205,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">openid-federation-entity-collection</td>
-<td class="right">April 2026</td>
+<td class="right">May 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Zachmann</td>
@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04-29" class="published">29 April 2026</time>
+<time datetime="2026-05-07" class="published">7 May 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1528,7 +1528,7 @@ If the responder does not support this feature, it MUST return an error response
             <li class="normal" id="section-3.3.1-2.2">
               <p id="section-3.3.1-2.2.1"><strong>limit</strong>: (OPTIONAL) Requested number of results included in the response.
 If this parameter is present, the number of results in the returned list MUST NOT be greater than the minimum of the responder's upper limit and the value of this parameter.
-If this parameter is not present the server MUST fall back on the upper limit.<br>
+If this parameter is not present the server MUST fall back on the upper limit, as described in <a href="#response-limits">Response Limits</a>.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.3">
@@ -1540,7 +1540,7 @@ If the responder does not support this feature, it MUST return an error response
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.5">
-              <p id="section-3.3.1-2.5.1"><strong>trust_anchor</strong>: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If the responder does not have a defined Entity Identifier, it MUST return an error response with the error code <code>invalid_request</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.5.1" class="pilcrow">¶</a></p>
+              <p id="section-3.3.1-2.5.1"><strong>trust_anchor</strong>: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If the responder does not have a defined Entity Identifier, it MUST return an error response with the error code <code>invalid_request</code> as defined in <a href="#error-response-format">Error Response Format</a>. If the requested Trust Anchor is not supported by the responder, it MUST return an error response with the error code <code>invalid_trust_anchor</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.6">
               <p id="section-3.3.1-2.6.1"><strong>query</strong>: (OPTIONAL) The value of this parameter is used by the responder to
@@ -1552,14 +1552,14 @@ If the responder does not support this feature, it MUST return an error response
             <li class="normal" id="section-3.3.1-2.7">
               <p id="section-3.3.1-2.7.1"><strong>entity_claims</strong>: (OPTIONAL) Claims to be included in the Entity Info Object included in the response for each collected Entity. All claims defined in <a href="#entity-info">Entity Info</a> MAY be requested. This parameter can be specified multiple times to request multiple claims.<br>
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.<br>
-If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Also Claims that are optional to return and not specified MUST NOT be included in the Entity Info.<br>
+If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Claims that are optional to return and not specified MUST NOT be included in the Entity Info.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<br>
 If the responder does not support a requested claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.7.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.8">
               <p id="section-3.3.1-2.8.1"><strong>ui_claims</strong>: (OPTIONAL) Claims to be included in the Entity Type UI Info Object included in the response for each returned Entity. All claims defined in <a href="#entity-type-ui-info">Entity Type UI Info</a> MAY be requested. This parameter can be specified multiple times to request multiple claims.<br>
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.<br>
-If this parameter is present, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type.<br>
+If this parameter is present, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type UI Info.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<br>
 If the responder does not support a requested claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.8.1" class="pilcrow">¶</a></p>
 </li>
@@ -1740,16 +1740,19 @@ single Entity Type of an Entity.<a href="#section-3.4.1.1.1.1-1" class="pilcrow"
                   <strong>unsupported_parameter</strong>: The server does not support a requested parameter. The HTTP response status code SHOULD be 400 (Bad Request).<a href="#section-3.4.2-2.1.2.1" class="pilcrow">¶</a>
 </li>
                 <li class="compact" id="section-3.4.2-2.1.2.2">
-                  <strong>invalid_request</strong>: The request is incomplete or does not comply with current specifications. The HTTP response status code SHOULD be 400 (Bad Request).<br><a href="#section-3.4.2-2.1.2.2" class="pilcrow">¶</a>
-</li>
-                <li class="compact" id="section-3.4.2-2.1.2.3">
-                  <strong>unsupported_claim</strong>: The server does not support a specific requested claim in the <code>entity_claims</code> or <code>ui_claims</code> parameter. The HTTP response status code SHOULD be 400 (Bad Request).<br>
+                  <strong>invalid_request</strong>: The request is incomplete or does not comply with current specifications. The HTTP response status code SHOULD be 400 (Bad Request).<br>
                   <br>
 
-In addition the following error codes defined by this specification MAY be used:<a href="#section-3.4.2-2.1.2.3" class="pilcrow">¶</a>
+In addition the following error codes defined by this specification MAY be used:<a href="#section-3.4.2-2.1.2.2" class="pilcrow">¶</a>
+</li>
+                <li class="compact" id="section-3.4.2-2.1.2.3">
+                  <strong>page_not_found</strong>: The pagination pointer provided in the <code>from</code> parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).<a href="#section-3.4.2-2.1.2.3" class="pilcrow">¶</a>
 </li>
                 <li class="compact" id="section-3.4.2-2.1.2.4">
-                  <strong>page_not_found</strong>: The pagination pointer provided in the <code>from</code> parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).<a href="#section-3.4.2-2.1.2.4" class="pilcrow">¶</a>
+                  <strong>unsupported_claim</strong>: The server does not support a specific requested claim in the <code>entity_claims</code> or <code>ui_claims</code> parameter. The HTTP response status code SHOULD be 400 (Bad Request).<br><a href="#section-3.4.2-2.1.2.4" class="pilcrow">¶</a>
+</li>
+                <li class="compact" id="section-3.4.2-2.1.2.5">
+                  <strong>invalid_trust_anchor</strong>: The Trust Anchor cannot be found or used. The HTTP response status code SHOULD be 404 (Not Found).<a href="#section-3.4.2-2.1.2.5" class="pilcrow">¶</a>
 </li>
               </ul>
 </li>
@@ -2126,6 +2129,10 @@ and the Geant Trust &amp; Identity Incubator of Geant5-2.<a href="#appendix-B-1"
         <li class="compact" id="appendix-C-3.4">Added examples demonstrating <code>entity_claims</code> and <code>ui_claims</code> parameter usage.<a href="#appendix-C-3.4" class="pilcrow">¶</a>
 </li>
         <li class="compact" id="appendix-C-3.5">Added support for HTTP POST method for unauthenticated clients.<a href="#appendix-C-3.5" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.6">Clarified error response if trust_anchor value is not supported.<a href="#appendix-C-3.6" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.7">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-3.7" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="appendix-C-4">-00<a href="#appendix-C-4" class="pilcrow">¶</a></p>
