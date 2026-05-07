@@ -1205,7 +1205,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">openid-federation-entity-collection</td>
-<td class="right">April 2026</td>
+<td class="right">May 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Zachmann</td>
@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04-29" class="published">29 April 2026</time>
+<time datetime="2026-05-07" class="published">7 May 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1545,7 +1545,7 @@ If this parameter is present and it is NOT an empty array, each Entity Type UI I
 If the responder does not support a requested claim, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.8.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.9">
-              <p id="section-3.3.1-2.9.1"><strong>language_tag</strong>: (OPTIONAL) Array of language tags according to BCP47 <span>[<a href="#RFC5646" class="cite xref">RFC5646</a>]</span>. If provided, UI claims in the response MUST be filtered to include only these languages. The default/untagged value (empty language tag) MUST always be included regardless of this parameter. If not provided or empty, all available languages MUST be included. When multiple <code>language_tag</code> parameters are present, for example <code>language_tag=en&amp;language_tag=de</code>, the result MUST include all language-tagged values matching any of the specified language tags. Language tag matching MUST follow RFC4647 basic filtering semantics, where a parent tag matches more specific subtags (for example, "en" matches "en-US").<br>
+              <p id="section-3.3.1-2.9.1"><strong>language_tag</strong>: (OPTIONAL) A language tag according to BCP47 <span>[<a href="#RFC5646" class="cite xref">RFC5646</a>]</span>. If provided, UI claims in the response MUST be filtered to include only this language. The default/untagged value (empty language tag) MUST always be included regardless of this parameter. If not provided, all available languages MUST be included. When multiple <code>language_tag</code> parameters are present, for example <code>language_tag=en&amp;language_tag=de</code>, the result MUST include all language-tagged values matching any of the specified language tags. Language tag matching MUST follow <span>[<a href="#RFC4647" class="cite xref">RFC4647</a>]</span> basic filtering semantics, where a parent tag matches more specific subtags (for example, "en" matches "en-US").<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.9.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
@@ -1897,6 +1897,10 @@ and clients MUST consider them as not yet verified.<a href="#section-6.1-2" clas
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4647">[RFC4647]</dt>
+      <dd>
+<span class="refAuthor">Phillips, A., Ed.</span> and <span class="refAuthor">M. Davis, Ed.</span>, <span class="refTitle">"Matching of Language Tags"</span>, <span class="seriesInfo">BCP 47</span>, <span class="seriesInfo">RFC 4647</span>, <span class="seriesInfo">DOI 10.17487/RFC4647</span>, <time datetime="2006-09" class="refDate">September 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4647">https://www.rfc-editor.org/info/rfc4647</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5646">[RFC5646]</dt>
       <dd>
