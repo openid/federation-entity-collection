@@ -240,7 +240,7 @@ Additional claims MAY be defined and used in conjunction with the claims above.
 
 ##### Entity Infos
 
-Entity Infos is a JSON Object containing UI-related information about a single
+Entity Infos is a JSON Object containing informational claims about a single
 Entity, but differentiated by its Entity Types.
 
 Each member name of the JSON object is an Entity Type Identifier and each
@@ -248,7 +248,7 @@ value is an Entity Type Info Object as defined in [Entity Type Info](#entity-typ
 
 ###### Entity Type Info
 
-Entity Type Info is a JSON Object containing UI-related information about a
+Entity Type Info is a JSON Object containing informational claims about a
 single Entity Type of an Entity.
 
 All Claims specified in section 5.2.2 "Informational Metadata Extensions" of [@!OpenID.Federation] MAY be used.
@@ -378,7 +378,7 @@ Host: openid.sunet.se
 
 ### Example Response with `info_claims`
 
-The following is a non-normative example of a response to the request above, showing only the requested UI claims in each Entity Info Object:
+The following is a non-normative example of a response to the request above, showing only the requested claims in each Entity Info Object:
 
 ```json
 {
