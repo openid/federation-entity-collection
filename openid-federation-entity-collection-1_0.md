@@ -362,7 +362,7 @@ The following is a non-normative example of a response to the request above, sho
       "trust_marks": [
         {
           "trust_mark": "eyJhbGciOiJSUzI1NiIsInR5cCI6InRydXN0LW1hcmsranV3dCJ9...",
-          "trust_mark_id": "https://www.swamid.se/policy/sirtfi/refeds-sirtfi-framework"
+          "trust_mark_type": "https://www.swamid.se/policy/sirtfi/refeds-sirtfi-framework"
         }
       ]
     },
