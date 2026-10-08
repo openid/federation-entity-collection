@@ -96,7 +96,7 @@ The Federation Entity Collection Endpoint is an optional endpoint that MAY be pu
 Federation Entities publishing this endpoint SHOULD also publish a
 `federation_resolve_endpoint`.
 
-An entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the `trust_anchor` request parameter is effectively required for the responder to produce a non-empty response.
+An entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the `trust_anchor` request parameter is REQUIRED for the responder to produce a non-empty response.
 
 ## Pagination
 By segmenting the data into pages, the endpoint facilitates the efficient transmission and processing of data and also adds to the client's ability to navigate through the information.
