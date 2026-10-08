@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-10-05" class="published">5 October 2026</time>
+<time datetime="2026-10-08" class="published">8 October 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1302,10 +1302,10 @@ li > p:last-of-type:only-child {
                     <p id="section-toc.1-1.3.2.5.2.2.1"><a href="#section-3.5.2" class="auto internal xref">3.5.2</a>.  <a href="#name-example-response-with-entit" class="internal xref">Example Response with <code>entity_claims</code></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.3">
-                    <p id="section-toc.1-1.3.2.5.2.3.1"><a href="#section-3.5.3" class="auto internal xref">3.5.3</a>.  <a href="#name-example-request-with-ui_cla" class="internal xref">Example Request with <code>ui_claims</code></a></p>
+                    <p id="section-toc.1-1.3.2.5.2.3.1"><a href="#section-3.5.3" class="auto internal xref">3.5.3</a>.  <a href="#name-example-request-with-info_c" class="internal xref">Example Request with <code>info_claims</code></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.4">
-                    <p id="section-toc.1-1.3.2.5.2.4.1"><a href="#section-3.5.4" class="auto internal xref">3.5.4</a>.  <a href="#name-example-response-with-ui_cl" class="internal xref">Example Response with <code>ui_claims</code></a></p>
+                    <p id="section-toc.1-1.3.2.5.2.4.1"><a href="#section-3.5.4" class="auto internal xref">3.5.4</a>.  <a href="#name-example-response-with-info_" class="internal xref">Example Response with <code>info_claims</code></a></p>
 </li>
                 </ul>
 </li>
@@ -1321,7 +1321,7 @@ li > p:last-of-type:only-child {
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-collecting-entities" class="internal xref">Collecting Entities</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-mapping-entity-configuratio" class="internal xref">Mapping Entity Configuration Claims to UI Info Response Claims</a></p>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-mapping-entity-configuratio" class="internal xref">Mapping Entity Configuration Claims to Entity Info Response Claims</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
                 <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-entity-collection-endpoint-" class="internal xref">Entity Collection Endpoint Scope</a></p>
@@ -1557,9 +1557,9 @@ If the responder does not support this feature, it MUST return an error response
 If the responder does not support a requested claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.7.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.8">
-              <p id="section-3.3.1-2.8.1"><strong>ui_claims</strong>: (OPTIONAL) Claims to be included in the Entity Type UI Info Object included in the response for each returned Entity. All claims defined in <a href="#entity-type-ui-info">Entity Type UI Info</a> MAY be requested. This parameter can be specified multiple times to request multiple claims.<br>
+              <p id="section-3.3.1-2.8.1"><strong>info_claims</strong>: (OPTIONAL) Claims to be included in the Entity Type Info Object included in the response for each returned Entity. All claims defined in <a href="#entity-type-info">Entity Type Info</a> MAY be requested. This parameter can be specified multiple times to request multiple claims.<br>
 If this parameter is NOT present it is at the discretion of the responder which claims are included or not.<br>
-If this parameter is present, each Entity Type UI Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type UI Info.<br>
+If this parameter is present, each Entity Type Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type Info.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<br>
 If the responder does not support a requested claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.8.1" class="pilcrow">¶</a></p>
 </li>
@@ -1639,9 +1639,9 @@ present this claim MUST contain all Entity Type Identifiers of the subject's
 Entity the responder knows about.<a href="#section-3.4.1.1-2.2" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-3.4.1.1-2.3">
-                <p id="section-3.4.1.1-2.3.1"><strong>ui_infos</strong>: (OPTIONAL) JSON Object containing information intended to be displayed to the user for each entity
-type as described in <a href="#ui-infos">UI Infos</a>.<br>
-If the request contains the <code>entity_type</code> parameter, the UI Infos Object MUST
+                <p id="section-3.4.1.1-2.3.1"><strong>entity_infos</strong>: (OPTIONAL) JSON Object containing information intended to be displayed to the user for each entity
+type as described in <a href="#entity-infos">Entity Infos</a>.<br>
+If the request contains the <code>entity_type</code> parameter, the Entity Infos Object MUST
 only contain Entity Type Identifiers that are among the ones requested, with the exception
 of the <code>federation_entity</code> Entity Type Identifier, which MAY also appear if not explicitly requested.<a href="#section-3.4.1.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
@@ -1651,21 +1651,21 @@ as defined in Section 3 of <span>[<a href="#OpenID.Federation" class="cite xref"
 </li>
             </ul>
 <p id="section-3.4.1.1-3">Additional claims MAY be defined and used in conjunction with the claims above.<a href="#section-3.4.1.1-3" class="pilcrow">¶</a></p>
-<div id="ui-infos">
+<div id="entity-infos">
 <section id="section-3.4.1.1.1">
-              <h6 id="name-ui-infos">
-<a href="#section-3.4.1.1.1" class="section-number selfRef">3.4.1.1.1. </a><a href="#name-ui-infos" class="section-name selfRef">UI Infos</a>
+              <h6 id="name-entity-infos">
+<a href="#section-3.4.1.1.1" class="section-number selfRef">3.4.1.1.1. </a><a href="#name-entity-infos" class="section-name selfRef">Entity Infos</a>
               </h6>
-<p id="section-3.4.1.1.1-1">UI Infos is a JSON Object containing UI-related information about a single
+<p id="section-3.4.1.1.1-1">Entity Infos is a JSON Object containing informational claims about a single
 Entity, but differentiated by its Entity Types.<a href="#section-3.4.1.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.1.1.1-2">Each member name of the JSON object is an Entity Type Identifier and each
-value is an Entity Type UI Info Object as defined in <a href="#entity-type-ui-info">Entity Type UI Info</a>.<a href="#section-3.4.1.1.1-2" class="pilcrow">¶</a></p>
-<div id="entity-type-ui-info">
+value is an Entity Type Info Object as defined in <a href="#entity-type-info">Entity Type Info</a>.<a href="#section-3.4.1.1.1-2" class="pilcrow">¶</a></p>
+<div id="entity-type-info">
 <section id="section-3.4.1.1.1.1">
-                <h6 id="name-entity-type-ui-info">
-<a href="#section-3.4.1.1.1.1" class="section-number selfRef">3.4.1.1.1.1. </a><a href="#name-entity-type-ui-info" class="section-name selfRef">Entity Type UI Info</a>
+                <h6 id="name-entity-type-info">
+<a href="#section-3.4.1.1.1.1" class="section-number selfRef">3.4.1.1.1.1. </a><a href="#name-entity-type-info" class="section-name selfRef">Entity Type Info</a>
                 </h6>
-<p id="section-3.4.1.1.1.1-1">Entity Type UI Info is a JSON Object containing UI-related information about a
+<p id="section-3.4.1.1.1.1-1">Entity Type Info is a JSON Object containing informational claims about a
 single Entity Type of an Entity.<a href="#section-3.4.1.1.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.1.1.1.1-2">All Claims specified in section 5.2.2 "Informational Metadata Extensions" of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> MAY be used.<a href="#section-3.4.1.1.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.4.1.1.1.1-3">Additional Claims MAY be defined and used in conjunction with the Claims above.<a href="#section-3.4.1.1.1.1-3" class="pilcrow">¶</a></p>
@@ -1688,7 +1688,7 @@ single Entity Type of an Entity.<a href="#section-3.4.1.1.1.1-1" class="pilcrow"
       "entity_types": [
         "federation_entity"
       ],
-      "ui_infos": {
+      "entity_infos": {
         "federation_entity": {
           "display_name": "The green organization",
           "logo_uri": "https://green.example.com/logo.png"
@@ -1701,7 +1701,7 @@ single Entity Type of an Entity.<a href="#section-3.4.1.1.1.1-1" class="pilcrow"
         "openid_relying_party",
         "federation_entity"
       ],
-      "ui_infos": {
+      "entity_infos": {
         "federation_entity": {
           "display_name": "Red Organization",
           "logo_uri": "https://red.example.com/logo.png"
@@ -1749,7 +1749,7 @@ In addition the following error codes defined by this specification MAY be used:
                   <strong>page_not_found</strong>: The pagination pointer provided in the <code>from</code> parameter is not or no longer known to the responder. The HTTP response status code SHOULD be 404 (Not Found).<a href="#section-3.4.2-2.1.2.3" class="pilcrow">¶</a>
 </li>
                 <li class="compact" id="section-3.4.2-2.1.2.4">
-                  <strong>unsupported_claim</strong>: The server does not support a specific requested claim in the <code>entity_claims</code> or <code>ui_claims</code> parameter. The HTTP response status code SHOULD be 400 (Bad Request).<br><a href="#section-3.4.2-2.1.2.4" class="pilcrow">¶</a>
+                  <strong>unsupported_claim</strong>: The server does not support a specific requested claim in the <code>entity_claims</code> or <code>info_claims</code> parameter. The HTTP response status code SHOULD be 400 (Bad Request).<br><a href="#section-3.4.2-2.1.2.4" class="pilcrow">¶</a>
 </li>
                 <li class="compact" id="section-3.4.2-2.1.2.5">
                   <strong>invalid_trust_anchor</strong>: The Trust Anchor cannot be found or used. The HTTP response status code SHOULD be 404 (Not Found).<a href="#section-3.4.2-2.1.2.5" class="pilcrow">¶</a>
@@ -1827,25 +1827,25 @@ Host: openid.sunet.se
 </div>
 </section>
 </div>
-<div id="example-request-with-ui-claims">
+<div id="example-request-with-info-claims">
 <section id="section-3.5.3">
-          <h4 id="name-example-request-with-ui_cla">
-<a href="#section-3.5.3" class="section-number selfRef">3.5.3. </a><a href="#name-example-request-with-ui_cla" class="section-name selfRef">Example Request with <code>ui_claims</code></a>
+          <h4 id="name-example-request-with-info_c">
+<a href="#section-3.5.3" class="section-number selfRef">3.5.3. </a><a href="#name-example-request-with-info_c" class="section-name selfRef">Example Request with <code>info_claims</code></a>
           </h4>
-<p id="section-3.5.3-1">The following is a non-normative example of a collection request with the <code>ui_claims</code> parameter specified multiple times:<a href="#section-3.5.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.5.3-1">The following is a non-normative example of a collection request with the <code>info_claims</code> parameter specified multiple times:<a href="#section-3.5.3-1" class="pilcrow">¶</a></p>
 <div class="lang-http sourcecode" id="section-3.5.3-2">
-<pre>GET /collection?entity_type=openid_provider&amp;ui_claims=display_name&amp;ui_claims=logo_uri HTTP/1.1
+<pre>GET /collection?entity_type=openid_provider&amp;info_claims=display_name&amp;info_claims=logo_uri HTTP/1.1
 Host: openid.sunet.se
 </pre><a href="#section-3.5.3-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
-<div id="example-response-with-ui-claims">
+<div id="example-response-with-info-claims">
 <section id="section-3.5.4">
-          <h4 id="name-example-response-with-ui_cl">
-<a href="#section-3.5.4" class="section-number selfRef">3.5.4. </a><a href="#name-example-response-with-ui_cl" class="section-name selfRef">Example Response with <code>ui_claims</code></a>
+          <h4 id="name-example-response-with-info_">
+<a href="#section-3.5.4" class="section-number selfRef">3.5.4. </a><a href="#name-example-response-with-info_" class="section-name selfRef">Example Response with <code>info_claims</code></a>
           </h4>
-<p id="section-3.5.4-1">The following is a non-normative example of a response to the request above, showing only the requested UI claims in each Entity Info Object:<a href="#section-3.5.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.5.4-1">The following is a non-normative example of a response to the request above, showing only the requested claims in each Entity Info Object:<a href="#section-3.5.4-1" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-3.5.4-2">
 <pre>{
   "entities": [
@@ -1854,7 +1854,7 @@ Host: openid.sunet.se
       "entity_types": [
         "openid_provider"
       ],
-      "ui_infos": {
+      "entity_infos": {
         "openid_provider": {
           "display_name": "Example University OP",
           "logo_uri": "https://op1.example.com/logo.png"
@@ -1866,7 +1866,7 @@ Host: openid.sunet.se
       "entity_types": [
         "openid_provider"
       ],
-      "ui_infos": {
+      "entity_infos": {
         "openid_provider": {
           "display_name": "Another University OP",
           "logo_uri": "https://op2.example.com/logo.png"
@@ -1890,7 +1890,7 @@ Host: openid.sunet.se
       </h2>
 <p id="section-4-1">Human-readable claim values and claim values that reference human-readable values MAY be represented in multiple languages and scripts. This specification enables such representations in the same manner as defined in Section 14 of OpenID Federation <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> and Section 5.2 of OpenID Connect Core 1.0 <span>[<a href="#OpenID.Core" class="cite xref">OpenID.Core</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">As described in OpenID Connect Core, to specify the languages and scripts, BCP47 <span>[<a href="#RFC5646" class="cite xref">RFC5646</a>]</span> language tags are added to member names, delimited by a <code>#</code> character. For example, <code>family_name#ja-Kana-JP</code> expresses the Family Name in Katakana in Japanese, which is commonly used to index and represent the phonetics of the Kanji representation of the same name represented as <code>family_name#ja-Hani-JP</code>.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">The following is an example of an Entity Type UI Info Object with claims
+<p id="section-4-3">The following is an example of an Entity Type Info Object with claims
 represented in multiple languages:<a href="#section-4-3" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4-4">
 <pre>{
@@ -1924,15 +1924,15 @@ Mark which is issued by the same Entity that provides the Entity Collection
 Endpoint.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="mapping-entity-configuration-claims-to-ui-info-response-claims">
+<div id="mapping-entity-configuration-claims-to-entity-info-response-claims">
 <section id="section-5.2">
         <h3 id="name-mapping-entity-configuratio">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-mapping-entity-configuratio" class="section-name selfRef">Mapping Entity Configuration Claims to UI Info Response Claims</a>
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-mapping-entity-configuratio" class="section-name selfRef">Mapping Entity Configuration Claims to Entity Info Response Claims</a>
         </h3>
-<p id="section-5.2-1">It is up to the implementation to decide how the claims of UI Info Objects in the response are
+<p id="section-5.2-1">It is up to the implementation to decide how the claims of Entity Info Objects in the response are
 populated. Implementations SHOULD consider the information published by entities
 in their Entity Configuration and MAY consider additional information.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">The following mapping between Claims in the <code>ui_infos</code> response Claim and Metadata Claims in the
+<p id="section-5.2-2">The following mapping between Claims in the <code>entity_infos</code> response Claim and Metadata Claims in the
 Entity Configuration SHOULD be considered:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-5.2-3.1">
@@ -2133,6 +2133,8 @@ and the Geant Trust &amp; Identity Incubator of Geant5-2.<a href="#appendix-B-1"
         <li class="compact" id="appendix-C-3.6">Clarified error response if trust_anchor value is not supported.<a href="#appendix-C-3.6" class="pilcrow">¶</a>
 </li>
         <li class="compact" id="appendix-C-3.7">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-3.7" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.8">Renamed the <code>ui_infos</code> response claim to <code>entity_infos</code> and the <code>ui_claims</code> request parameter to <code>info_claims</code>.<a href="#appendix-C-3.8" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="appendix-C-4">-00<a href="#appendix-C-4" class="pilcrow">¶</a></p>
