@@ -1445,6 +1445,7 @@ and "Trust Mark", "Federation Entity", "Federation Entity Key", "Trust Anchor",
 <p id="section-3-1">The Federation Entity Collection Endpoint is an optional endpoint that MAY be published by Federation Entities. It MUST use the <code>https</code> scheme and MAY include port, path, and query parameter components encoded in <code>application/x-www-form-urlencoded</code> format. It MUST NOT contain a fragment component.
 Federation Entities publishing this endpoint SHOULD also publish a
 <code>federation_resolve_endpoint</code>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">An entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the <code>trust_anchor</code> request parameter is REQUIRED for the responder to produce a non-empty response.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="pagination">
 <section id="section-3.1">
         <h3 id="name-pagination">
@@ -1540,7 +1541,8 @@ If the responder does not support this feature, it MUST return an error response
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.5">
-              <p id="section-3.3.1-2.5.1"><strong>trust_anchor</strong>: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If the responder does not have a defined Entity Identifier, it MUST return an error response with the error code <code>invalid_request</code> as defined in <a href="#error-response-format">Error Response Format</a>. If the requested Trust Anchor is not supported by the responder, it MUST return an error response with the error code <code>invalid_trust_anchor</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.5.1" class="pilcrow">¶</a></p>
+              <p id="section-3.3.1-2.5.1"><strong>trust_anchor</strong>: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If this parameter is omitted and the responder does not have a defined Entity Identifier (e.g., because it is not part of a federation), it MUST return an error response with the error code <code>invalid_request</code> as defined in <a href="#error-response-format">Error Response Format</a>. If this parameter is omitted and the responder is not itself a Trust Anchor, an empty response is returned.<br>
+If the requested Trust Anchor is not supported by the responder, it MUST return an error response with the error code <code>invalid_trust_anchor</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.6">
               <p id="section-3.3.1-2.6.1"><strong>query</strong>: (OPTIONAL) The value of this parameter is used by the responder to
@@ -2122,19 +2124,21 @@ and the Geant Trust &amp; Identity Incubator of Geant5-2.<a href="#appendix-B-1"
 <ul class="compact">
 <li class="compact" id="appendix-C-3.1">Clarified the description of the <code>last_updated</code> response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.<a href="#appendix-C-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.2">Added references to Entity Info and Entity Type UI Info sections in <code>entity_claims</code> and <code>ui_claims</code> parameter descriptions.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.2">Clarified the <code>trust_anchor</code> parameter description: explained that the responder need not be part of a federation, and that omitting the parameter when the responder is not a Trust Anchor results in an empty response.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.3">Added <code>unsupported_claim</code> error code for unsupported claims in <code>entity_claims</code> and <code>ui_claims</code> parameters.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.3">Added references to Entity Info and Entity Type UI Info sections in <code>entity_claims</code> and <code>ui_claims</code> parameter descriptions.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.4">Added examples demonstrating <code>entity_claims</code> and <code>ui_claims</code> parameter usage.<a href="#appendix-C-3.4" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.4">Added <code>unsupported_claim</code> error code for unsupported claims in <code>entity_claims</code> and <code>ui_claims</code> parameters.<a href="#appendix-C-3.4" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.5">Added support for HTTP POST method for unauthenticated clients.<a href="#appendix-C-3.5" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.5">Added examples demonstrating <code>entity_claims</code> and <code>ui_claims</code> parameter usage.<a href="#appendix-C-3.5" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.6">Clarified error response if trust_anchor value is not supported.<a href="#appendix-C-3.6" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.6">Added support for HTTP POST method for unauthenticated clients.<a href="#appendix-C-3.6" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.7">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-3.7" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.7">Clarified error response if trust_anchor value is not supported.<a href="#appendix-C-3.7" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.8">Renamed the <code>ui_infos</code> response claim to <code>entity_infos</code> and the <code>ui_claims</code> request parameter to <code>info_claims</code>.<a href="#appendix-C-3.8" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.8">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-3.8" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.9">Renamed the <code>ui_infos</code> response claim to <code>entity_infos</code> and the <code>ui_claims</code> request parameter to <code>info_claims</code>.<a href="#appendix-C-3.9" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="appendix-C-4">-00<a href="#appendix-C-4" class="pilcrow">¶</a></p>
