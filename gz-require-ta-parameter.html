@@ -1205,7 +1205,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">openid-federation-entity-collection</td>
-<td class="right">July 2026</td>
+<td class="right">October 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Zachmann</td>
@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-13" class="published">13 July 2026</time>
+<time datetime="2026-10-08" class="published">8 October 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1445,7 +1445,7 @@ and "Trust Mark", "Federation Entity", "Federation Entity Key", "Trust Anchor",
 <p id="section-3-1">The Federation Entity Collection Endpoint is an optional endpoint that MAY be published by Federation Entities. It MUST use the <code>https</code> scheme and MAY include port, path, and query parameter components encoded in <code>application/x-www-form-urlencoded</code> format. It MUST NOT contain a fragment component.
 Federation Entities publishing this endpoint SHOULD also publish a
 <code>federation_resolve_endpoint</code>.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">An entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the <code>trust_anchor</code> request parameter is effectively required for the responder to produce a non-empty response.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-2">An entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the <code>trust_anchor</code> request parameter is REQUIRED for the responder to produce a non-empty response.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="pagination">
 <section id="section-3.1">
         <h3 id="name-pagination">
