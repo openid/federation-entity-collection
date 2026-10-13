@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-10-08" class="published">8 October 2026</time>
+<time datetime="2026-10-13" class="published">13 October 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1564,6 +1564,10 @@ If this parameter is NOT present it is at the discretion of the responder which 
 If this parameter is present, each Entity Type Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type Info.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<br>
 If the responder does not support a requested claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.8.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.3.1-2.9">
+              <p id="section-3.3.1-2.9.1"><strong>locale</strong>: (OPTIONAL) A language tag according to BCP47 <span>[<a href="#RFC5646" class="cite xref">RFC5646</a>]</span>. If provided, UI claims in the response MUST be filtered to include only this language. The default/untagged value (empty language tag) MUST always be included regardless of this parameter. If not provided, all available languages MUST be included. When multiple <code>locale</code> parameters are present, for example <code>locale=en&amp;locale=de</code>, the result MUST include all language-tagged values matching any of the specified language tags. Language tag matching MUST follow <span>[<a href="#RFC4647" class="cite xref">RFC4647</a>]</span> basic filtering semantics, where a parent tag matches more specific subtags (for example, "en" matches "en-US").<br>
+If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.9.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-3.3.1-3">When Client authentication is used, the request MUST be an HTTP request using the POST method, with the parameters passed in the POST body.<a href="#section-3.3.1-3" class="pilcrow">¶</a></p>
@@ -2036,6 +2040,10 @@ and clients MUST consider them as not yet verified.<a href="#section-6.1-2" clas
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC4647">[RFC4647]</dt>
+      <dd>
+<span class="refAuthor">Phillips, A., Ed.</span> and <span class="refAuthor">M. Davis, Ed.</span>, <span class="refTitle">"Matching of Language Tags"</span>, <span class="seriesInfo">BCP 47</span>, <span class="seriesInfo">RFC 4647</span>, <span class="seriesInfo">DOI 10.17487/RFC4647</span>, <time datetime="2006-09" class="refDate">September 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4647">https://www.rfc-editor.org/info/rfc4647</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC5646">[RFC5646]</dt>
       <dd>
 <span class="refAuthor">Phillips, A., Ed.</span> and <span class="refAuthor">M. Davis, Ed.</span>, <span class="refTitle">"Tags for Identifying Languages"</span>, <span class="seriesInfo">BCP 47</span>, <span class="seriesInfo">RFC 5646</span>, <span class="seriesInfo">DOI 10.17487/RFC5646</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5646">https://www.rfc-editor.org/info/rfc5646</a>&gt;</span>. </dd>
@@ -2122,23 +2130,25 @@ and the Geant Trust &amp; Identity Incubator of Geant5-2.<a href="#appendix-B-1"
 <p id="appendix-C-1">[[ To be removed from the final specification ]]<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <p id="appendix-C-2">-01<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-3.1">Clarified the description of the <code>last_updated</code> response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.<a href="#appendix-C-3.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-3.1">Added the <code>locale</code> request parameter to enable clients to filter UI claims by preferred languages (Issue #38).<a href="#appendix-C-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.2">Clarified the <code>trust_anchor</code> parameter description: explained that the responder need not be part of a federation, and that omitting the parameter when the responder is not a Trust Anchor results in an empty response.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.2">Clarified the description of the <code>last_updated</code> response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.3">Added references to Entity Info and Entity Type UI Info sections in <code>entity_claims</code> and <code>ui_claims</code> parameter descriptions.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.3">Clarified the <code>trust_anchor</code> parameter description: explained that the responder need not be part of a federation, and that omitting the parameter when the responder is not a Trust Anchor results in an empty response.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.4">Added <code>unsupported_claim</code> error code for unsupported claims in <code>entity_claims</code> and <code>ui_claims</code> parameters.<a href="#appendix-C-3.4" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.4">Added references to Entity Info and Entity Type UI Info sections in <code>entity_claims</code> and <code>ui_claims</code> parameter descriptions.<a href="#appendix-C-3.4" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.5">Added examples demonstrating <code>entity_claims</code> and <code>ui_claims</code> parameter usage.<a href="#appendix-C-3.5" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.5">Added <code>unsupported_claim</code> error code for unsupported claims in <code>entity_claims</code> and <code>ui_claims</code> parameters.<a href="#appendix-C-3.5" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.6">Added support for HTTP POST method for unauthenticated clients.<a href="#appendix-C-3.6" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.6">Added examples demonstrating <code>entity_claims</code> and <code>ui_claims</code> parameter usage.<a href="#appendix-C-3.6" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.7">Clarified error response if trust_anchor value is not supported.<a href="#appendix-C-3.7" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.7">Added support for HTTP POST method for unauthenticated clients.<a href="#appendix-C-3.7" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.8">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-3.8" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.8">Clarified error response if trust_anchor value is not supported.<a href="#appendix-C-3.8" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.9">Renamed the <code>ui_infos</code> response claim to <code>entity_infos</code> and the <code>ui_claims</code> request parameter to <code>info_claims</code>.<a href="#appendix-C-3.9" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.9">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-3.9" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.10">Renamed the <code>ui_infos</code> response claim to <code>entity_infos</code> and the <code>ui_claims</code> request parameter to <code>info_claims</code>.<a href="#appendix-C-3.10" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="appendix-C-4">-00<a href="#appendix-C-4" class="pilcrow">¶</a></p>
