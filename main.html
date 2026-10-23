@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>OpenID Federation Entity Collection Endpoint 1.0 - draft 01</title>
+<title>OpenID Federation Entity Collection Endpoint 1.0 - draft 02</title>
 <meta content="Gabriel Zachmann" name="author">
 <meta content="
        This specification acts as an extension to  . It defines an additional federation endpoint to retrieve a filterable list of Entities in a (sub-)federation. 
@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-10-13" class="published">13 October 2026</time>
+<time datetime="2026-10-23" class="published">23 October 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1231,7 +1231,7 @@ li > p:last-of-type:only-child {
 </dd>
 </dl>
 </div>
-<h1 id="title">OpenID Federation Entity Collection Endpoint 1.0 - draft 01</h1>
+<h1 id="title">OpenID Federation Entity Collection Endpoint 1.0 - draft 02</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This specification acts as an extension to <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>. It defines an additional federation endpoint to retrieve a filterable list of Entities in a (sub-)federation.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -2128,32 +2128,33 @@ and the Geant Trust &amp; Identity Incubator of Geant5-2.<a href="#appendix-B-1"
 <a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
 <p id="appendix-C-1">[[ To be removed from the final specification ]]<a href="#appendix-C-1" class="pilcrow">¶</a></p>
-<p id="appendix-C-2">-01<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">-02<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">-01<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-3.1">Added the <code>locale</code> request parameter to enable clients to filter UI claims by preferred languages (Issue #38).<a href="#appendix-C-3.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-4.1">Added the <code>locale</code> request parameter to enable clients to filter UI claims by preferred languages (Issue #38).<a href="#appendix-C-4.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.2">Clarified the description of the <code>last_updated</code> response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.2">Clarified the description of the <code>last_updated</code> response field to specify that it refers to when the responder last traversed or refreshed its federation entity collection.<a href="#appendix-C-4.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.3">Clarified the <code>trust_anchor</code> parameter description: explained that the responder need not be part of a federation, and that omitting the parameter when the responder is not a Trust Anchor results in an empty response.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.3">Clarified the <code>trust_anchor</code> parameter description: explained that the responder need not be part of a federation, and that omitting the parameter when the responder is not a Trust Anchor results in an empty response.<a href="#appendix-C-4.3" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.4">Added references to Entity Info and Entity Type UI Info sections in <code>entity_claims</code> and <code>ui_claims</code> parameter descriptions.<a href="#appendix-C-3.4" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.4">Added references to Entity Info and Entity Type UI Info sections in <code>entity_claims</code> and <code>ui_claims</code> parameter descriptions.<a href="#appendix-C-4.4" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.5">Added <code>unsupported_claim</code> error code for unsupported claims in <code>entity_claims</code> and <code>ui_claims</code> parameters.<a href="#appendix-C-3.5" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.5">Added <code>unsupported_claim</code> error code for unsupported claims in <code>entity_claims</code> and <code>ui_claims</code> parameters.<a href="#appendix-C-4.5" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.6">Added examples demonstrating <code>entity_claims</code> and <code>ui_claims</code> parameter usage.<a href="#appendix-C-3.6" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.6">Added examples demonstrating <code>entity_claims</code> and <code>ui_claims</code> parameter usage.<a href="#appendix-C-4.6" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.7">Added support for HTTP POST method for unauthenticated clients.<a href="#appendix-C-3.7" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.7">Added support for HTTP POST method for unauthenticated clients.<a href="#appendix-C-4.7" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.8">Clarified error response if trust_anchor value is not supported.<a href="#appendix-C-3.8" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.8">Clarified error response if trust_anchor value is not supported.<a href="#appendix-C-4.8" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.9">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-3.9" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.9">Clarified the <code>limit</code> parameter description by adding a reference to the <a href="#response-limits">Response Limits</a> section.<a href="#appendix-C-4.9" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.10">Renamed the <code>ui_infos</code> response claim to <code>entity_infos</code> and the <code>ui_claims</code> request parameter to <code>info_claims</code>.<a href="#appendix-C-3.10" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.10">Renamed the <code>ui_infos</code> response claim to <code>entity_infos</code> and the <code>ui_claims</code> request parameter to <code>info_claims</code>.<a href="#appendix-C-4.10" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-C-4">-00<a href="#appendix-C-4" class="pilcrow">¶</a></p>
+<p id="appendix-C-5">-00<a href="#appendix-C-5" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-5.1">Initial version, fixing OpenID Federation issue #56.<a href="#appendix-C-5.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-6.1">Initial version, fixing OpenID Federation issue #56.<a href="#appendix-C-6.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
