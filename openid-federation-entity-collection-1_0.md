@@ -1,5 +1,5 @@
 %%%
-title = "OpenID Federation Entity Collection Endpoint 1.0 - draft 01"
+title = "OpenID Federation Entity Collection Endpoint 1.0 - draft 02"
 abbrev = "openid-federation-entity-collection"
 ipr = "none"
 workgroup = "OpenID Connect Working Group"
@@ -637,6 +637,8 @@ and the Geant Trust & Identity Incubator of Geant5-2.
 # Document History
 
 [[ To be removed from the final specification ]]
+
+-02
 
 -01
 
