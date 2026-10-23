@@ -39,10 +39,10 @@ The endpoint is intended to support discovery and selection use cases in which
 a client presents a curated set of Entities to end users or administrators.
 Examples include selection interfaces (for example, login pickers) and
 administrative views. To support such use cases, responses MAY include user
-interface–oriented information (for example, display names, logos, and
-descriptions) and the endpoint MAY support filtering (for example, by entity
-type, trust mark type, or query text), as defined in this specification.
-Usage of the endpoint for other use cases that require a list of entities in a
+interface-oriented information (for example, display names, logos, and
+descriptions) and the endpoint MAY support filtering (for example, by Entity
+Type, Trust Mark Type, or query text), as defined in this specification.
+Usage of the endpoint for other use cases that require a list of Entities in a
 federation is possible.
 
 Information returned by this endpoint is informational. It is intended to
@@ -53,8 +53,8 @@ MUST be performed according to OpenID Federation.
 ## Rationale and Benefits
 
 This specification complements the federation core functionality by providing
-an endpoint optimized for discovery, filtering, and presentation of federation
-entities at scale. The following benefits motivate implementation:
+an endpoint optimized for discovery, filtering, and presentation of Federation
+Entities at scale. The following benefits motivate implementation:
 
 - Coverage beyond direct subordinates: Enables discovery across multiple
   federation levels without requiring clients to recursively traverse
@@ -62,8 +62,8 @@ entities at scale. The following benefits motivate implementation:
 - UI-oriented metadata: Supports inclusion of human-readable attributes (for
   example, display name, description, logo URI, policy URI) to directly power
   selection and catalog views without separate metadata lookups.
-- Server-side filtering: Allows responders to filter by entity type, trust mark
-  type, and free-form query, reducing client-side processing and network
+- Server-side filtering: Allows responders to filter by Entity Type, Trust Mark
+  Type, and free-form query, reducing client-side processing and network
   round-trips.
 - Pagination and incremental retrieval: Supports efficient list pagination using
   `from` and `limit`, suitable for large federations.
@@ -86,7 +86,6 @@ RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as de
 
 This specification uses the terms
 "Entity" as defined by OpenID Connect Core [@!OpenID.Core],
-"Client" as defined by [@!RFC6749],
 and "Trust Mark", "Federation Entity", "Federation Entity Key", "Trust Anchor",
 "Intermediate", and "Subordinate Statement" defined in [@!OpenID.Federation].
 
@@ -96,7 +95,7 @@ The Federation Entity Collection Endpoint is an optional endpoint that MAY be pu
 Federation Entities publishing this endpoint SHOULD also publish a
 `federation_resolve_endpoint`.
 
-An entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the `trust_anchor` request parameter is REQUIRED for the responder to produce a non-empty response.
+An Entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the `trust_anchor` request parameter is REQUIRED for the responder to produce a non-empty response.
 
 ## Pagination
 By segmenting the data into pages, the endpoint facilitates the efficient transmission and processing of data and also adds to the client's ability to navigate through the information.
@@ -109,7 +108,7 @@ No recommendation is made on which key the ordering is based upon and is left up
 
 ### Response Limits
 
-This endpoint defines the limit query parameter, allowing consumers to specify a desired maximum number of Entities returned in a given response set. However, this number may, in some cases, be impractical or not feasible for the issuing Entity to return. To address this, it is RECOMMENDED that implementations define a practical upper limit for the response size that can be served. This defined limit MUST be set to a value that ensures if no limit is specified in a request, or if the implementation deems the requested limit impractical, the response can be returned successfully with all requested additional parameters.
+This endpoint defines the `limit` query parameter, allowing consumers to specify a desired maximum number of Entities returned in a given response set. However, this number may, in some cases, be impractical or not feasible for the issuing Entity to return. To address this, it is RECOMMENDED that implementations define a practical upper limit for the response size that can be served. This defined limit MUST be set to a value that ensures if no limit is specified in a request, or if the implementation deems the requested limit impractical, the response can be returned successfully with all requested additional parameters.
 
 ## Endpoint Location
 
@@ -139,7 +138,7 @@ The following is a non-normative example of an Entity Configuration payload, for
       "federation_fetch_endpoint": "https://ta.example.org/fetch",
       "federation_list_endpoint": "https://ta.example.org/list",
       "federation_resolve_endpoint": "https://ta.example.org/resolve",
-      "federation_collection_endpoint": "https://ta.example.org/collect"
+      "federation_collection_endpoint": "https://ta.example.org/collection"
     }
   }
 }
@@ -152,7 +151,7 @@ The following is a non-normative example of an Entity Configuration payload, for
 When client authentication is not used, the request to the `federation_collection_endpoint` MUST be an HTTP request using either the GET or POST method with the following parameters, encoded in `application/x-www-form-urlencoded` format. For GET requests, parameters are sent as query parameters. For POST requests, parameters are sent in the request body, and the Content-Type header MUST be set to application/x-www-form-urlencoded.
 
 - **from**: (OPTIONAL) If this parameter is present, the resulting list MUST be the subset of the overall ordered response starting from this pointer. This parameter MUST be copied from the `next` response parameter of a previous request.
-  If the pointer in this parameter is not or not longer known to the responder, it MUST return an error response with the error code `page_not_found` as defined in [Error Response Format](#error-response-format).  
+  If the pointer in this parameter is not or no longer known to the responder, it MUST return an error response with the error code `page_not_found` as defined in [Error Response Format](#error-response-format).  
   If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 - **limit**: (OPTIONAL) Requested number of results included in the response.
@@ -160,54 +159,54 @@ If this parameter is present, the number of results in the returned list MUST NO
 If this parameter is not present the server MUST fall back on the upper limit, as described in [Response Limits](#response-limits).  
   If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
   
-- **entity_type**: (OPTIONAL) The value of this parameter is an Entity Type Identifier. The result MUST be filtered to include only those entities that include the specified Entity Type. When multiple `entity_type` parameters are present, for example `entity_type=openid_provider&entity_type=openid_relying_party`, the result MUST be filtered to include all Entities that include any of the specified Entity Types. 
+- **entity_type**: (OPTIONAL) The value of this parameter is an Entity Type Identifier. The result MUST be filtered to include only those Entities that include the specified Entity Type. When multiple `entity_type` parameters are present, for example `entity_type=openid_provider&entity_type=openid_relying_party`, the result MUST be filtered to include all Entities that include any of the specified Entity Types. 
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 - **trust_mark_type**: (OPTIONAL) The value of this parameter is a Trust Mark Type Identifier. The result MUST be filtered to include only Entities that publish a Trust Mark of this Trust Mark Type in their Entity Configuration and that Trust Mark MUST be verified by the responder. The responder SHOULD verify the Trust Mark using the same Trust Anchor that is used to collect the Entities. When multiple `trust_mark_type` parameters are present, the result MUST be filtered to include only Entities that have a Trust Mark for all the specified Trust Mark Types.  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
-- **trust_anchor**: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If this parameter is omitted and the responder does not have a defined Entity Identifier (e.g., because it is not part of a federation), it MUST return an error response with the error code `invalid_request` as defined in [Error Response Format](#error-response-format). If this parameter is omitted and the responder is not itself a Trust Anchor, an empty response is returned.  
+- **trust_anchor**: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If this parameter is omitted and the responder does not have a defined Entity Identifier (for example, because it is not part of a federation), it MUST return an error response with the error code `invalid_request` as defined in [Error Response Format](#error-response-format). If this parameter is omitted and the responder is not itself a Trust Anchor, an empty response is returned.  
 If the requested Trust Anchor is not supported by the responder, it MUST return an error response with the error code `invalid_trust_anchor` as defined in [Error Response Format](#error-response-format).
 
 - **query**: (OPTIONAL) The value of this parameter is used by the responder to
-filter down the list of returned Entities to only entities that match this
+filter down the list of returned Entities to only Entities that match this
 parameter value. It is entirely up to the responder to define when an Entity
 matches the query.  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
--	**entity_claims**: (OPTIONAL) Claims to be included in the Entity Info Object included in the response for each collected Entity. All claims defined in [Entity Info](#entity-info) MAY be requested. This parameter can be specified multiple times to request multiple claims.  
-If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
-If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Claims that are optional to return and not specified MUST NOT be included in the Entity Info.  
+- **entity_claims**: (OPTIONAL) Claims to be included in the Entity Info Object included in the response for each collected Entity. All Claims defined in [Entity Info](#entity-info) MAY be requested. This parameter can be specified multiple times to request multiple Claims.  
+If this parameter is NOT present it is at the discretion of the responder which Claims are included or not.  
+If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested Claims unless a specific Claim is not available for that Entity. Claims that are optional to return and not specified MUST NOT be included in the Entity Info.  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).  
-If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_claim` as defined in [Error Response Format](#error-response-format).
+If the responder does not support a requested Claim, it MUST return an error response with the error code `unsupported_claim` as defined in [Error Response Format](#error-response-format).
 
--	**info_claims**: (OPTIONAL) Claims to be included in the Entity Type Info Object included in the response for each returned Entity. All claims defined in [Entity Type Info](#entity-type-info) MAY be requested. This parameter can be specified multiple times to request multiple claims.  
-If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
-If this parameter is present, each Entity Type Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type Info.  
+- **info_claims**: (OPTIONAL) Claims to be included in the Entity Type Info Object included in the response for each returned Entity. All Claims defined in [Entity Type Info](#entity-type-info) MAY be requested. This parameter can be specified multiple times to request multiple Claims.  
+If this parameter is NOT present it is at the discretion of the responder which Claims are included or not.  
+If this parameter is present, each Entity Type Info Object MUST include the requested Claims unless a specific Claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type Info.  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).  
-If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_claim` as defined in [Error Response Format](#error-response-format).
+If the responder does not support a requested Claim, it MUST return an error response with the error code `unsupported_claim` as defined in [Error Response Format](#error-response-format).
 
-- **locale**: (OPTIONAL) A language tag according to BCP47 [@!RFC5646]. If provided, UI claims in the response MUST be filtered to include only this language. The default/untagged value (empty language tag) MUST always be included regardless of this parameter. If not provided, all available languages MUST be included. When multiple `locale` parameters are present, for example `locale=en&locale=de`, the result MUST include all language-tagged values matching any of the specified language tags. Language tag matching MUST follow [@!RFC4647] basic filtering semantics, where a parent tag matches more specific subtags (for example, "en" matches "en-US").  
+- **locale**: (OPTIONAL) A language tag according to BCP47 [@!RFC5646]. If provided, UI Claims in the response MUST be filtered to include only this language. The default/untagged value (empty language tag) MUST always be included regardless of this parameter. If not provided, all available languages MUST be included. When multiple `locale` parameters are present, for example `locale=en&locale=de`, the result MUST include all language-tagged values matching any of the specified language tags. Language tag matching MUST follow [@!RFC4647] basic filtering semantics, where a parent tag matches more specific subtags (for example, "en" matches "en-US").  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
-When Client authentication is used, the request MUST be an HTTP request using the POST method, with the parameters passed in the POST body.
+When client authentication is used, the request MUST be an HTTP request using the POST method, with the parameters passed in the POST body.
 
 #### Example Request
 
 The following are non-normative examples of collection requests:
 
 ```http
-GET /collection?entity_type=openid_provider&trust_mark_type=https%3A%2F%2Frp%2Erefeds.org%2Fsitfi&trust_anchor=https%3A%2F%2Fswamid.se HTTP/1.1
-Host: openid.sunet.se
+GET /collection?entity_type=openid_provider&trust_mark_type=https%3A%2F%2Fexample.org%2Ftrustmark&trust_anchor=https%3A%2F%2Fta.example.org HTTP/1.1
+Host: ta.example.org
 ```
 
 ```http
 POST /collection HTTP/1.1
-Host: openid.sunet.se
+Host: ta.example.org
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 138
+Content-Length: 123
 
-entity_type=openid_provider&trust_mark_type=https%3A%2F%2Frp%2Erefeds.org%2Fsitfi&trust_anchor=https%3A%2F%2Fswamid.se
+entity_type=openid_provider&trust_mark_type=https%3A%2F%2Fexample.org%2Ftrustmark&trust_anchor=https%3A%2F%2Fta.example.org
 ```
 
 ## Entity Collection Response
@@ -216,32 +215,32 @@ entity_type=openid_provider&trust_mark_type=https%3A%2F%2Frp%2Erefeds.org%2Fsitf
 
 A successful response MUST use the HTTP status code 200 and the content type `application/json`. 
 
-The response is a JSON object with the following claims:
+The response is a JSON object with the following Claims:
 
 - **entities**: (REQUIRED) Array of JSON objects, each representing a
 Federation Entity as described in [Entity Info](#entity-info). The list of Entities MUST
 only contain Entities that are in line with the requested parameters. The
 responder MAY also filter down the list further at its own discretion.
 - **next**: (OPTIONAL) An opaque pointer to the next page in the
-result list. This attribute is REQUIRED when additional results are available
-beyond those included in the `entities` array. To content of this attribute is
+result list. This Claim is REQUIRED when additional results are available
+beyond those included in the `entities` array. The content of this Claim is
 entirely up to the responder and its pagination implementation strategy.
-- **last_updated**: (RECOMMENDED) Number. Time when the responder last traversed or refreshed its federation entity collection. This is expressed as Seconds Since the Epoch, per [@!RFC7519]. If the `last_updated` time changes between paginated calls, this might be an indication for the client that the underlying data may have changed since a previous call. 
+- **last_updated**: (RECOMMENDED) Number. Time when the responder last traversed or refreshed its Federation Entity collection. This is expressed as Seconds Since the Epoch, per [@!RFC7519]. If the `last_updated` time changes between paginated calls, this might be an indication for the client that the underlying data may have changed since a previous call. 
 
-Additional claims MAY be defined and used in conjunction with the claims above.
+Additional Claims MAY be defined and used in conjunction with the Claims above.
 
 #### Entity Info
 
 Each JSON Object in the returned `entities` array MAY contain the following
-claims:
+Claims:
 
-- **entity_id**: (REQUIRED) The Entity Identifier for the subject entity of the
+- **entity_id**: (REQUIRED) The Entity Identifier for the subject Entity of the
 current record.
 - **entity_types**: (RECOMMENDED) Array of string Entity Type Identifiers. If
-present this claim MUST contain all Entity Type Identifiers of the subject's
+present this Claim MUST contain all Entity Type Identifiers of the subject's
 Entity the responder knows about.
-- **entity_infos**: (OPTIONAL) JSON Object containing information intended to be displayed to the user for each entity
-type as described in [Entity Infos](#entity-infos).  
+- **entity_infos**: (OPTIONAL) JSON Object containing information intended to be displayed to the user for each Entity
+Type as described in [Entity Infos](#entity-infos).  
 If the request contains the `entity_type` parameter, the Entity Infos Object MUST
 only contain Entity Type Identifiers that are among the ones requested, with the exception
 of the `federation_entity` Entity Type Identifier, which MAY also appear if not explicitly requested.  
@@ -249,11 +248,11 @@ of the `federation_entity` Entity Type Identifier, which MAY also appear if not 
 - **trust_marks**: (OPTIONAL) Array of objects, each representing a Trust Mark,
 as defined in Section 3 of [@!OpenID.Federation].
 
-Additional claims MAY be defined and used in conjunction with the claims above.
+Additional Claims MAY be defined and used in conjunction with the Claims above.
 
 ##### Entity Infos
 
-Entity Infos is a JSON Object containing informational claims about a single
+Entity Infos is a JSON Object containing informational Claims about a single
 Entity, but differentiated by its Entity Types.
 
 Each member name of the JSON object is an Entity Type Identifier and each
@@ -261,7 +260,7 @@ value is an Entity Type Info Object as defined in [Entity Type Info](#entity-typ
 
 ###### Entity Type Info
 
-Entity Type Info is a JSON Object containing informational claims about a
+Entity Type Info is a JSON Object containing informational Claims about a
 single Entity Type of an Entity.
 
 All Claims specified in section 5.2.2 "Informational Metadata Extensions" of [@!OpenID.Federation] MAY be used.
@@ -329,7 +328,7 @@ If the request was malformed or an error occurred during the processing of the r
 The following is a non-normative example of an error response:
 
 ```http
-400 Bad Request
+HTTP/1.1 400 Bad Request
 Content-Type: application/json
 
 {
@@ -348,12 +347,12 @@ The following is a non-normative example of a collection request with the `entit
 
 ```http
 GET /collection?entity_type=openid_provider&entity_claims=entity_types&entity_claims=trust_marks HTTP/1.1
-Host: openid.sunet.se
+Host: ta.example.org
 ```
 
 ### Example Response with `entity_claims`
 
-The following is a non-normative example of a response to the request above, showing only the requested claims in each Entity Info Object:
+The following is a non-normative example of a response to the request above, showing only the requested Claims in each Entity Info Object:
 
 ```json
 {
@@ -365,8 +364,8 @@ The following is a non-normative example of a response to the request above, sho
       ],
       "trust_marks": [
         {
-          "trust_mark": "eyJhbGciOiJSUzI1NiIsInR5cCI6InRydXN0LW1hcmsranV3dCJ9...",
-          "trust_mark_type": "https://www.swamid.se/policy/sirtfi/refeds-sirtfi-framework"
+          "trust_mark": "eyJhbGciOiJSUzI1NiIsInR5cCI6InRydXN0LW1hcmsrand0In0...",
+          "trust_mark_type": "https://example.org/trustmark"
         }
       ]
     },
@@ -386,12 +385,12 @@ The following is a non-normative example of a collection request with the `info_
 
 ```http
 GET /collection?entity_type=openid_provider&info_claims=display_name&info_claims=logo_uri HTTP/1.1
-Host: openid.sunet.se
+Host: ta.example.org
 ```
 
 ### Example Response with `info_claims`
 
-The following is a non-normative example of a response to the request above, showing only the requested claims in each Entity Info Object:
+The following is a non-normative example of a response to the request above, showing only the requested Claims in each Entity Type Info Object:
 
 ```json
 {
@@ -426,11 +425,11 @@ The following is a non-normative example of a response to the request above, sho
 
 #  Claims Languages and Scripts
 
-Human-readable claim values and claim values that reference human-readable values MAY be represented in multiple languages and scripts. This specification enables such representations in the same manner as defined in Section 14 of OpenID Federation [@!OpenID.Federation] and Section 5.2 of OpenID Connect Core 1.0 [@!OpenID.Core].
+Human-readable Claim values and Claim values that reference human-readable values MAY be represented in multiple languages and scripts. This specification enables such representations in the same manner as defined in Section 14 of OpenID Federation [@!OpenID.Federation] and Section 5.2 of OpenID Connect Core 1.0 [@!OpenID.Core].
 
 As described in OpenID Connect Core, to specify the languages and scripts, BCP47 [@!RFC5646] language tags are added to member names, delimited by a `#` character. For example, `family_name#ja-Kana-JP` expresses the Family Name in Katakana in Japanese, which is commonly used to index and represent the phonetics of the Kanji representation of the same name represented as `family_name#ja-Hani-JP`. 
 
-The following is an example of an Entity Type Info Object with claims
+The following is an example of an Entity Type Info Object with Claims
 represented in multiple languages:
 
 ```json
@@ -447,31 +446,31 @@ represented in multiple languages:
 # Implementation Considerations
 
 ## Collecting Entities
-It is up to the implementation to decide how entities are collected.
+It is up to the implementation to decide how Entities are collected.
 A general and straightforward approach is described in section 17.2.2 of [@!OpenID.Federation]. 
-Implementations MAY use other approaches to collect entities. Those MAY also be based
+Implementations MAY use other approaches to collect Entities. Those MAY also be based
 on additional information available to the responder. An example could be when the
-entity collection response should only include entities with a certain Trust
+Entity Collection response should only include Entities with a certain Trust
 Mark which is issued by the same Entity that provides the Entity Collection
 Endpoint.
 
 ## Mapping Entity Configuration Claims to Entity Info Response Claims 
-It is up to the implementation to decide how the claims of Entity Info Objects in the response are
-populated. Implementations SHOULD consider the information published by entities
+It is up to the implementation to decide how the Claims of Entity Info Objects in the response are
+populated. Implementations SHOULD consider the information published by Entities
 in their Entity Configuration and MAY consider additional information.
 
 The following mapping between Claims in the `entity_infos` response Claim and Metadata Claims in the
 Entity Configuration SHOULD be considered:
 
-- `display_name`: The `display_name` Claim is a common Metadata Claim useable with all Entity Types. If set it SHOULD be copied to the response. If the `display_name` Claim is not set other Claims MAY be considered, such as:
+- `display_name`: The `display_name` Claim is a common Metadata Claim usable with all Entity Types. If set it SHOULD be copied to the response. If the `display_name` Claim is not set other Claims MAY be considered, such as:
   - For the `openid_relying_party` Entity Type: `client_name`
   - For the `oauth_client` Entity Type: `client_name`
   - For the `oauth_resource` Entity Type: `resource_name`
-- `description`: The `description` Claim is a common Metadata Claim useable with all Entity Types. It SHOULD be copied to the response.
-- `keywords`: The `keywords` Claim is a common Metadata Claim useable with all Entity Types. It SHOULD be copied to the response.
-- `logo_uri`: The `logo_uri` Claim is a common Metadata Claim useable with all Entity Types. It SHOULD be copied to the response.
-- `policy_uri`: The `policy_uri` Claim is a common Metadata Claim useable with all Entity Types. It SHOULD be copied to the response.
-- `information_uri`: The `information_uri` Claim is a common Metadata Claim useable with all Entity Types. It SHOULD be copied to the response.
+- `description`: The `description` Claim is a common Metadata Claim usable with all Entity Types. It SHOULD be copied to the response.
+- `keywords`: The `keywords` Claim is a common Metadata Claim usable with all Entity Types. It SHOULD be copied to the response.
+- `logo_uri`: The `logo_uri` Claim is a common Metadata Claim usable with all Entity Types. It SHOULD be copied to the response.
+- `policy_uri`: The `policy_uri` Claim is a common Metadata Claim usable with all Entity Types. It SHOULD be copied to the response.
+- `information_uri`: The `information_uri` Claim is a common Metadata Claim usable with all Entity Types. It SHOULD be copied to the response.
 
 ## Entity Collection Endpoint Scope
 
@@ -499,7 +498,7 @@ To verify an Entity, proper trust validation according to OpenID Federation 1.0 
 still MUST be done.
 
 It is also noted that Trust Marks returned in the response MAY not be verified
-and clients MUST consider them as not yet verified.
+and Clients MUST consider them as not yet verified.
 
 
 {backmatter}
@@ -623,6 +622,7 @@ specification.
 # Acknowledgements
 
 We would like to thank the following individuals for their contributions to this specification:
+Alan Buxey,
 Niels van Dijk,
 Michael Fraser,
 Marko Ivančić,
@@ -632,7 +632,7 @@ Giuseppe De Marco,
 Stefan Santesson,
 Phil Smart,
 Zacharias Törnblom,
-and the Geant Trust & Identity Incubator of Geant5-2.
+and the GÉANT Trust & Identity Incubator of GN5-2.
 
 # Document History
 
