@@ -156,8 +156,8 @@ When client authentication is not used, the request to the `federation_collectio
   If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 - **limit**: (OPTIONAL) Requested number of results included in the response.
-If this parameter is present, the number of results in the returned list MUST NOT be greater than the minimum of the responder's upper limit and the value of this parameter.
-If this parameter is not present the server MUST fall back on the upper limit, as described in [Response Limits](#response-limits).  
+The value of this parameter MUST be an integer greater than zero.
+If this parameter is present, the number of results in the returned list SHOULD NOT be greater than the value of this parameter.  
   If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
   
 - **entity_type**: (OPTIONAL) The value of this parameter is an Entity Type Identifier. The result MUST be filtered to include only those entities that include the specified Entity Type. When multiple `entity_type` parameters are present, for example `entity_type=openid_provider&entity_type=openid_relying_party`, the result MUST be filtered to include all Entities that include any of the specified Entity Types. 
