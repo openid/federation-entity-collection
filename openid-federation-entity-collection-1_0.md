@@ -107,6 +107,15 @@ The selected method of pagination offers a mix of consistency and performance ch
 As pagination enables consumers of this endpoint to retrieve a subset of the full dataset, the responding Entity MUST ensure consistent ordering is implemented across all returned responses.
 No recommendation is made on which key the ordering is based upon and is left up to the choice of implementing Entities.
 
+An Entity Collection is not a static dataset: Entities may be added, changed, or removed between
+successive paginated calls. Clients SHOULD NOT expect a series of paginated calls to yield a
+globally consistent snapshot of the data. The responder MAY reflect such changes in subsequent
+pages, which means consecutive pages may skip Entities but MUST NOT contain duplicates. Clients can detect that the
+underlying data may have changed between paginated calls by comparing the `last_updated` value
+(see [Response Format](#response-format)) across responses. When such a change is detected,
+clients SHOULD restart the pagination from the initial request if a consistent view of the
+dataset is required.
+
 ### Response Limits
 
 This endpoint defines the limit query parameter, allowing consumers to specify a desired maximum number of Entities returned in a given response set. However, this number may, in some cases, be impractical or not feasible for the issuing Entity to return. To address this, it is RECOMMENDED that implementations define a practical upper limit for the response size that can be served. This defined limit MUST be set to a value that ensures if no limit is specified in a request, or if the implementation deems the requested limit impractical, the response can be returned successfully with all requested additional parameters.
@@ -226,6 +235,10 @@ responder MAY also filter down the list further at its own discretion.
 result list. This attribute is REQUIRED when additional results are available
 beyond those included in the `entities` array. To content of this attribute is
 entirely up to the responder and its pagination implementation strategy.
+The responder MUST NOT invalidate the `next` pointer because the underlying data changes.
+It is still possible that a `next` pointer may get invalidated when it points to a concrete Entity and
+that Entity is no longer part of the collection (as also noted in the description of
+the [`from` request parameter](#request-format)).
 - **last_updated**: (RECOMMENDED) Number. Time when the responder last traversed or refreshed its federation entity collection. This is expressed as Seconds Since the Epoch, per [@!RFC7519]. If the `last_updated` time changes between paginated calls, this might be an indication for the client that the underlying data may have changed since a previous call. 
 
 Additional claims MAY be defined and used in conjunction with the claims above.
