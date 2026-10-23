@@ -640,6 +640,8 @@ and the Geant Trust & Identity Incubator of Geant5-2.
 
 -02
 
+* Editorial changes
+
 -01
 
 * Added the `locale` request parameter to enable clients to filter UI claims by preferred languages (Issue #38).
