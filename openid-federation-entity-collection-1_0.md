@@ -498,8 +498,9 @@ information MUST be considered as informational.
 To verify an Entity, proper trust validation according to OpenID Federation 1.0 [@!OpenID.Federation]
 still MUST be done.
 
-It is also noted that Trust Marks returned in the response MAY not be verified
-and clients MUST consider them as not yet verified.
+It is also noted that clients MUST consider Trust Marks returned in the response as not
+yet verified and clients MUST verify them according to OpenID Federation 1.0 [@!OpenID.Federation]
+before relying on it.
 
 
 {backmatter}
