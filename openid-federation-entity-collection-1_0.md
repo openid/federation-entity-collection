@@ -176,18 +176,18 @@ matches the query.
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 -	**entity_claims**: (OPTIONAL) Claims to be included in the Entity Info Object included in the response for each collected Entity. All claims defined in [Entity Info](#entity-info) MAY be requested. This parameter can be specified multiple times to request multiple claims.  
-If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
+If this parameter is not present it is at the discretion of the responder which claims are included or not.  
 If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Claims that are optional to return and not specified MUST NOT be included in the Entity Info.  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).  
 If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_claim` as defined in [Error Response Format](#error-response-format).
 
 -	**info_claims**: (OPTIONAL) Claims to be included in the Entity Type Info Object included in the response for each returned Entity. All claims defined in [Entity Type Info](#entity-type-info) MAY be requested. This parameter can be specified multiple times to request multiple claims.  
-If this parameter is NOT present it is at the discretion of the responder which claims are included or not.  
+If this parameter is not present it is at the discretion of the responder which claims are included or not.  
 If this parameter is present, each Entity Type Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type Info.  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).  
 If the responder does not support a requested claim, it MUST return an error response with the error code `unsupported_claim` as defined in [Error Response Format](#error-response-format).
 
-- **locale**: (OPTIONAL) A language tag according to BCP47 [@!RFC5646]. If provided, UI claims in the response MUST be filtered to include only this language. The default/untagged value (empty language tag) MUST always be included regardless of this parameter. If not provided, all available languages MUST be included. When multiple `locale` parameters are present, for example `locale=en&locale=de`, the result MUST include all language-tagged values matching any of the specified language tags. Language tag matching MUST follow [@!RFC4647] basic filtering semantics, where a parent tag matches more specific subtags (for example, "en" matches "en-US").  
+- **locale**: (OPTIONAL) A language tag according to BCP47 [@!RFC5646]. If provided, Entity Type Info claims in the response MUST be filtered to include only this language. The default/untagged value (empty language tag) MUST always be included regardless of this parameter. If not provided, all available languages MUST be included. When multiple `locale` parameters are present, for example `locale=en&locale=de`, the result MUST include all language-tagged values matching any of the specified language tags. Language tag matching MUST follow [@!RFC4647] basic filtering semantics, where a parent tag matches more specific subtags (for example, "en" matches "en-US").  
 If the responder does not support this feature, it MUST return an error response with the error code `unsupported_parameter` as defined in [Error Response Format](#error-response-format).
 
 When Client authentication is used, the request MUST be an HTTP request using the POST method, with the parameters passed in the POST body.
@@ -232,7 +232,7 @@ Additional claims MAY be defined and used in conjunction with the claims above.
 
 #### Entity Info
 
-Each JSON Object in the returned `entities` array MAY contain the following
+Each JSON Object in the returned `entities` array contains the following
 claims:
 
 - **entity_id**: (REQUIRED) The Entity Identifier for the subject entity of the
@@ -639,6 +639,8 @@ and the Geant Trust & Identity Incubator of Geant5-2.
 [[ To be removed from the final specification ]]
 
 -02
+
+* Editorial changes
 
 -01
 
