@@ -1444,7 +1444,7 @@ and "Trust Mark", "Federation Entity", "Federation Entity Key", "Trust Anchor",
 <p id="section-3-1">The Federation Entity Collection Endpoint is an optional endpoint that MAY be published by Federation Entities. It MUST use the <code>https</code> scheme and MAY include port, path, and query parameter components encoded in <code>application/x-www-form-urlencoded</code> format. It MUST NOT contain a fragment component.
 Federation Entities publishing this endpoint SHOULD also publish a
 <code>federation_resolve_endpoint</code>.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">An Entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the <code>trust_anchor</code> request parameter is REQUIRED for the responder to produce a non-empty response.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-2">An Entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the responder can only construct a meaningful response when the <code>trust_anchor</code> request parameter is provided.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="pagination">
 <section id="section-3.1">
         <h3 id="name-pagination">
@@ -1540,7 +1540,7 @@ If the responder does not support this feature, it MUST return an error response
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.5">
-              <p id="section-3.3.1-2.5.1"><strong>trust_anchor</strong>: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If this parameter is omitted and the responder does not have a defined Entity Identifier (for example, because it is not part of a federation), it MUST return an error response with the error code <code>invalid_request</code> as defined in <a href="#error-response-format">Error Response Format</a>. If this parameter is omitted and the responder is not itself a Trust Anchor, an empty response is returned.<br>
+              <p id="section-3.3.1-2.5.1"><strong>trust_anchor</strong>: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If this parameter is omitted and the responder does not have a defined Entity Identifier (for example, because it is not part of a federation), it MUST return an error response with the error code <code>invalid_request</code> as defined in <a href="#error-response-format">Error Response Format</a>. If this parameter is omitted and the responder does not have any subordinates, the response's <code>entities</code> Claim value MUST be the empty array <code>[]</code>.<br>
 If the requested Trust Anchor is not supported by the responder, it MUST return an error response with the error code <code>invalid_trust_anchor</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.6">
