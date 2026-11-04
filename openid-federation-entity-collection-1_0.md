@@ -642,6 +642,9 @@ and the GÉANT Trust & Identity Incubator of GN5-2.
 -02
 
 * Editorial changes
+* Clarified the `limit` request parameter: its value MUST be an integer greater than zero, and when present the returned list SHOULD NOT exceed it.
+* Rephrased that Trust Marks returned in the response are not yet verified and MUST be client-verified for clarification.
+* Clarified the `trust_anchor` request parameter when the responder is not a Trust Anchor.
 
 -01
 
