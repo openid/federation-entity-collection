@@ -1205,7 +1205,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">openid-federation-entity-collection</td>
-<td class="right">October 2026</td>
+<td class="right">November 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Zachmann</td>
@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-10-23" class="published">23 October 2026</time>
+<time datetime="2026-11-04" class="published">4 November 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1370,10 +1370,10 @@ indirectly to the selected Trust Anchor.<a href="#section-1-1" class="pilcrow">�
 a client presents a curated set of Entities to end users or administrators.
 Examples include selection interfaces (for example, login pickers) and
 administrative views. To support such use cases, responses MAY include user
-interface–oriented information (for example, display names, logos, and
-descriptions) and the endpoint MAY support filtering (for example, by entity
-type, trust mark type, or query text), as defined in this specification.
-Usage of the endpoint for other use cases that require a list of entities in a
+interface-oriented information (for example, display names, logos, and
+descriptions) and the endpoint MAY support filtering (for example, by Entity
+Type, Trust Mark Type, or query text), as defined in this specification.
+Usage of the endpoint for other use cases that require a list of Entities in a
 federation is possible.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">Information returned by this endpoint is informational. It is intended to
 facilitate presentation and efficient narrowing of the result set. It does not
@@ -1385,8 +1385,8 @@ MUST be performed according to OpenID Federation.<a href="#section-1-3" class="p
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-rationale-and-benefits" class="section-name selfRef">Rationale and Benefits</a>
         </h3>
 <p id="section-1.1-1">This specification complements the federation core functionality by providing
-an endpoint optimized for discovery, filtering, and presentation of federation
-entities at scale. The following benefits motivate implementation:<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+an endpoint optimized for discovery, filtering, and presentation of Federation
+Entities at scale. The following benefits motivate implementation:<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-1.1-2.1">Coverage beyond direct subordinates: Enables discovery across multiple
 federation levels without requiring clients to recursively traverse
@@ -1396,8 +1396,8 @@ intermediates.<a href="#section-1.1-2.1" class="pilcrow">¶</a>
 example, display name, description, logo URI, policy URI) to directly power
 selection and catalog views without separate metadata lookups.<a href="#section-1.1-2.2" class="pilcrow">¶</a>
 </li>
-          <li class="compact" id="section-1.1-2.3">Server-side filtering: Allows responders to filter by entity type, trust mark
-type, and free-form query, reducing client-side processing and network
+          <li class="compact" id="section-1.1-2.3">Server-side filtering: Allows responders to filter by Entity Type, Trust Mark
+Type, and free-form query, reducing client-side processing and network
 round-trips.<a href="#section-1.1-2.3" class="pilcrow">¶</a>
 </li>
           <li class="compact" id="section-1.1-2.4">Pagination and incremental retrieval: Supports efficient list pagination using
@@ -1432,7 +1432,6 @@ RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as de
       </h2>
 <p id="section-2-1">This specification uses the terms
 "Entity" as defined by OpenID Connect Core <span>[<a href="#OpenID.Core" class="cite xref">OpenID.Core</a>]</span>,
-"Client" as defined by <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>,
 and "Trust Mark", "Federation Entity", "Federation Entity Key", "Trust Anchor",
 "Intermediate", and "Subordinate Statement" defined in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 </section>
@@ -1445,7 +1444,7 @@ and "Trust Mark", "Federation Entity", "Federation Entity Key", "Trust Anchor",
 <p id="section-3-1">The Federation Entity Collection Endpoint is an optional endpoint that MAY be published by Federation Entities. It MUST use the <code>https</code> scheme and MAY include port, path, and query parameter components encoded in <code>application/x-www-form-urlencoded</code> format. It MUST NOT contain a fragment component.
 Federation Entities publishing this endpoint SHOULD also publish a
 <code>federation_resolve_endpoint</code>.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">An entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the <code>trust_anchor</code> request parameter is REQUIRED for the responder to produce a non-empty response.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-2">An Entity providing this endpoint does not need to be part of the federation itself, nor does it need to act as a Trust Anchor. In such cases, the <code>trust_anchor</code> request parameter is REQUIRED for the responder to produce a non-empty response.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="pagination">
 <section id="section-3.1">
         <h3 id="name-pagination">
@@ -1467,7 +1466,7 @@ No recommendation is made on which key the ordering is based upon and is left up
           <h4 id="name-response-limits">
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-response-limits" class="section-name selfRef">Response Limits</a>
           </h4>
-<p id="section-3.1.2-1">This endpoint defines the limit query parameter, allowing consumers to specify a desired maximum number of Entities returned in a given response set. However, this number may, in some cases, be impractical or not feasible for the issuing Entity to return. To address this, it is RECOMMENDED that implementations define a practical upper limit for the response size that can be served. This defined limit MUST be set to a value that ensures if no limit is specified in a request, or if the implementation deems the requested limit impractical, the response can be returned successfully with all requested additional parameters.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-1">This endpoint defines the <code>limit</code> query parameter, allowing consumers to specify a desired maximum number of Entities returned in a given response set. However, this number may, in some cases, be impractical or not feasible for the issuing Entity to return. To address this, it is RECOMMENDED that implementations define a practical upper limit for the response size that can be served. This defined limit MUST be set to a value that ensures if no limit is specified in a request, or if the implementation deems the requested limit impractical, the response can be returned successfully with all requested additional parameters.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1501,7 +1500,7 @@ No recommendation is made on which key the ordering is based upon and is left up
       "federation_fetch_endpoint": "https://ta.example.org/fetch",
       "federation_list_endpoint": "https://ta.example.org/list",
       "federation_resolve_endpoint": "https://ta.example.org/resolve",
-      "federation_collection_endpoint": "https://ta.example.org/collect"
+      "federation_collection_endpoint": "https://ta.example.org/collection"
     }
   }
 }
@@ -1523,7 +1522,7 @@ No recommendation is made on which key the ordering is based upon and is left up
 <ul class="normal">
 <li class="normal" id="section-3.3.1-2.1">
               <p id="section-3.3.1-2.1.1"><strong>from</strong>: (OPTIONAL) If this parameter is present, the resulting list MUST be the subset of the overall ordered response starting from this pointer. This parameter MUST be copied from the <code>next</code> response parameter of a previous request.
-If the pointer in this parameter is not or not longer known to the responder, it MUST return an error response with the error code <code>page_not_found</code> as defined in <a href="#error-response-format">Error Response Format</a>.<br>
+If the pointer in this parameter is not or no longer known to the responder, it MUST return an error response with the error code <code>page_not_found</code> as defined in <a href="#error-response-format">Error Response Format</a>.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.2">
@@ -1533,7 +1532,7 @@ If this parameter is not present the server MUST fall back on the upper limit, a
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.3">
-              <p id="section-3.3.1-2.3.1"><strong>entity_type</strong>: (OPTIONAL) The value of this parameter is an Entity Type Identifier. The result MUST be filtered to include only those entities that include the specified Entity Type. When multiple <code>entity_type</code> parameters are present, for example <code>entity_type=openid_provider&amp;entity_type=openid_relying_party</code>, the result MUST be filtered to include all Entities that include any of the specified Entity Types.
+              <p id="section-3.3.1-2.3.1"><strong>entity_type</strong>: (OPTIONAL) The value of this parameter is an Entity Type Identifier. The result MUST be filtered to include only those Entities that include the specified Entity Type. When multiple <code>entity_type</code> parameters are present, for example <code>entity_type=openid_provider&amp;entity_type=openid_relying_party</code>, the result MUST be filtered to include all Entities that include any of the specified Entity Types.
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.4">
@@ -1541,36 +1540,36 @@ If the responder does not support this feature, it MUST return an error response
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.5">
-              <p id="section-3.3.1-2.5.1"><strong>trust_anchor</strong>: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If this parameter is omitted and the responder does not have a defined Entity Identifier (e.g., because it is not part of a federation), it MUST return an error response with the error code <code>invalid_request</code> as defined in <a href="#error-response-format">Error Response Format</a>. If this parameter is omitted and the responder is not itself a Trust Anchor, an empty response is returned.<br>
+              <p id="section-3.3.1-2.5.1"><strong>trust_anchor</strong>: (RECOMMENDED) The Trust Anchor that the collection endpoint MUST use when collecting Entities. The value is an Entity Identifier. If omitted, the responder sets this parameter to its own Entity Identifier. If this parameter is omitted and the responder does not have a defined Entity Identifier (for example, because it is not part of a federation), it MUST return an error response with the error code <code>invalid_request</code> as defined in <a href="#error-response-format">Error Response Format</a>. If this parameter is omitted and the responder is not itself a Trust Anchor, an empty response is returned.<br>
 If the requested Trust Anchor is not supported by the responder, it MUST return an error response with the error code <code>invalid_trust_anchor</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.6">
               <p id="section-3.3.1-2.6.1"><strong>query</strong>: (OPTIONAL) The value of this parameter is used by the responder to
-filter down the list of returned Entities to only entities that match this
+filter down the list of returned Entities to only Entities that match this
 parameter value. It is entirely up to the responder to define when an Entity
 matches the query.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.7">
-              <p id="section-3.3.1-2.7.1"><strong>entity_claims</strong>: (OPTIONAL) Claims to be included in the Entity Info Object included in the response for each collected Entity. All claims defined in <a href="#entity-info">Entity Info</a> MAY be requested. This parameter can be specified multiple times to request multiple claims.<br>
-If this parameter is not present it is at the discretion of the responder which claims are included or not.<br>
-If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested claims unless a specific claim is not available for that Entity. Claims that are optional to return and not specified MUST NOT be included in the Entity Info.<br>
+              <p id="section-3.3.1-2.7.1"><strong>entity_claims</strong>: (OPTIONAL) Claims to be included in the Entity Info Object included in the response for each collected Entity. All Claims defined in <a href="#entity-info">Entity Info</a> MAY be requested. This parameter can be specified multiple times to request multiple Claims.<br>
+If this parameter is not present it is at the discretion of the responder which Claims are included or not.<br>
+If this parameter is present, each Entity Info Object that represents an Entity MUST include the requested Claims unless a specific Claim is not available for that Entity. Claims that are optional to return and not specified MUST NOT be included in the Entity Info.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<br>
-If the responder does not support a requested claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.7.1" class="pilcrow">¶</a></p>
+If the responder does not support a requested Claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.7.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.8">
-              <p id="section-3.3.1-2.8.1"><strong>info_claims</strong>: (OPTIONAL) Claims to be included in the Entity Type Info Object included in the response for each returned Entity. All claims defined in <a href="#entity-type-info">Entity Type Info</a> MAY be requested. This parameter can be specified multiple times to request multiple claims.<br>
-If this parameter is not present it is at the discretion of the responder which claims are included or not.<br>
-If this parameter is present, each Entity Type Info Object MUST include the requested claims unless a specific claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type Info.<br>
+              <p id="section-3.3.1-2.8.1"><strong>info_claims</strong>: (OPTIONAL) Claims to be included in the Entity Type Info Object included in the response for each returned Entity. All Claims defined in <a href="#entity-type-info">Entity Type Info</a> MAY be requested. This parameter can be specified multiple times to request multiple Claims.<br>
+If this parameter is not present it is at the discretion of the responder which Claims are included or not.<br>
+If this parameter is present, each Entity Type Info Object MUST include the requested Claims unless a specific Claim is not available for that Entity and Entity Type. Claims that are optional to return and not specified MUST NOT be included in the Entity Type Info.<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<br>
-If the responder does not support a requested claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.8.1" class="pilcrow">¶</a></p>
+If the responder does not support a requested Claim, it MUST return an error response with the error code <code>unsupported_claim</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.8.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.3.1-2.9">
-              <p id="section-3.3.1-2.9.1"><strong>locale</strong>: (OPTIONAL) A language tag according to BCP47 <span>[<a href="#RFC5646" class="cite xref">RFC5646</a>]</span>. If provided, Entity Type Info claims in the response MUST be filtered to include only this language. The default/untagged value (empty language tag) MUST always be included regardless of this parameter. If not provided, all available languages MUST be included. When multiple <code>locale</code> parameters are present, for example <code>locale=en&amp;locale=de</code>, the result MUST include all language-tagged values matching any of the specified language tags. Language tag matching MUST follow <span>[<a href="#RFC4647" class="cite xref">RFC4647</a>]</span> basic filtering semantics, where a parent tag matches more specific subtags (for example, "en" matches "en-US").<br>
+              <p id="section-3.3.1-2.9.1"><strong>locale</strong>: (OPTIONAL) A language tag according to BCP47 <span>[<a href="#RFC5646" class="cite xref">RFC5646</a>]</span>. If provided, Entity Type Info Claims in the response MUST be filtered to include only this language. The default/untagged value (empty language tag) MUST always be included regardless of this parameter. If not provided, all available languages MUST be included. When multiple <code>locale</code> parameters are present, for example <code>locale=en&amp;locale=de</code>, the result MUST include all language-tagged values matching any of the specified language tags. Language tag matching MUST follow <span>[<a href="#RFC4647" class="cite xref">RFC4647</a>]</span> basic filtering semantics, where a parent tag matches more specific subtags (for example, "en" matches "en-US").<br>
 If the responder does not support this feature, it MUST return an error response with the error code <code>unsupported_parameter</code> as defined in <a href="#error-response-format">Error Response Format</a>.<a href="#section-3.3.1-2.9.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.3.1-3">When Client authentication is used, the request MUST be an HTTP request using the POST method, with the parameters passed in the POST body.<a href="#section-3.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-3">When client authentication is used, the request MUST be an HTTP request using the POST method, with the parameters passed in the POST body.<a href="#section-3.3.1-3" class="pilcrow">¶</a></p>
 <div id="example-request">
 <section id="section-3.3.1.1">
             <h5 id="name-example-request">
@@ -1578,17 +1577,17 @@ If the responder does not support this feature, it MUST return an error response
             </h5>
 <p id="section-3.3.1.1-1">The following are non-normative examples of collection requests:<a href="#section-3.3.1.1-1" class="pilcrow">¶</a></p>
 <div class="lang-http sourcecode" id="section-3.3.1.1-2">
-<pre>GET /collection?entity_type=openid_provider&amp;trust_mark_type=https%3A%2F%2Frp%2Erefeds.org%2Fsitfi&amp;trust_anchor=https%3A%2F%2Fswamid.se HTTP/1.1
-Host: openid.sunet.se
+<pre>GET /collection?entity_type=openid_provider&amp;trust_mark_type=https%3A%2F%2Fexample.org%2Ftrustmark&amp;trust_anchor=https%3A%2F%2Fta.example.org HTTP/1.1
+Host: ta.example.org
 </pre><a href="#section-3.3.1.1-2" class="pilcrow">¶</a>
 </div>
 <div class="lang-http sourcecode" id="section-3.3.1.1-3">
 <pre>POST /collection HTTP/1.1
-Host: openid.sunet.se
+Host: ta.example.org
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 138
+Content-Length: 123
 
-entity_type=openid_provider&amp;trust_mark_type=https%3A%2F%2Frp%2Erefeds.org%2Fsitfi&amp;trust_anchor=https%3A%2F%2Fswamid.se
+entity_type=openid_provider&amp;trust_mark_type=https%3A%2F%2Fexample.org%2Ftrustmark&amp;trust_anchor=https%3A%2F%2Fta.example.org
 </pre><a href="#section-3.3.1.1-3" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1608,7 +1607,7 @@ entity_type=openid_provider&amp;trust_mark_type=https%3A%2F%2Frp%2Erefeds.org%2F
 <a href="#section-3.4.1" class="section-number selfRef">3.4.1. </a><a href="#name-response-format" class="section-name selfRef">Response Format</a>
           </h4>
 <p id="section-3.4.1-1">A successful response MUST use the HTTP status code 200 and the content type <code>application/json</code>.<a href="#section-3.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.4.1-2">The response is a JSON object with the following claims:<a href="#section-3.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-2">The response is a JSON object with the following Claims:<a href="#section-3.4.1-2" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-3.4.1-3.1">
               <strong>entities</strong>: (REQUIRED) Array of JSON objects, each representing a
@@ -1618,35 +1617,35 @@ responder MAY also filter down the list further at its own discretion.<a href="#
 </li>
             <li class="compact" id="section-3.4.1-3.2">
               <strong>next</strong>: (OPTIONAL) An opaque pointer to the next page in the
-result list. This attribute is REQUIRED when additional results are available
-beyond those included in the <code>entities</code> array. To content of this attribute is
+result list. This Claim is REQUIRED when additional results are available
+beyond those included in the <code>entities</code> array. The content of this Claim is
 entirely up to the responder and its pagination implementation strategy.<a href="#section-3.4.1-3.2" class="pilcrow">¶</a>
 </li>
             <li class="compact" id="section-3.4.1-3.3">
-              <strong>last_updated</strong>: (RECOMMENDED) Number. Time when the responder last traversed or refreshed its federation entity collection. This is expressed as Seconds Since the Epoch, per <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. If the <code>last_updated</code> time changes between paginated calls, this might be an indication for the client that the underlying data may have changed since a previous call.<a href="#section-3.4.1-3.3" class="pilcrow">¶</a>
+              <strong>last_updated</strong>: (RECOMMENDED) Number. Time when the responder last traversed or refreshed its Federation Entity collection. This is expressed as Seconds Since the Epoch, per <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. If the <code>last_updated</code> time changes between paginated calls, this might be an indication for the client that the underlying data may have changed since a previous call.<a href="#section-3.4.1-3.3" class="pilcrow">¶</a>
 </li>
           </ul>
-<p id="section-3.4.1-4">Additional claims MAY be defined and used in conjunction with the claims above.<a href="#section-3.4.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-4">Additional Claims MAY be defined and used in conjunction with the Claims above.<a href="#section-3.4.1-4" class="pilcrow">¶</a></p>
 <div id="entity-info">
 <section id="section-3.4.1.1">
             <h5 id="name-entity-info">
 <a href="#section-3.4.1.1" class="section-number selfRef">3.4.1.1. </a><a href="#name-entity-info" class="section-name selfRef">Entity Info</a>
             </h5>
 <p id="section-3.4.1.1-1">Each JSON Object in the returned <code>entities</code> array contains the following
-claims:<a href="#section-3.4.1.1-1" class="pilcrow">¶</a></p>
+Claims:<a href="#section-3.4.1.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.4.1.1-2.1">
-                <strong>entity_id</strong>: (REQUIRED) The Entity Identifier for the subject entity of the
+                <strong>entity_id</strong>: (REQUIRED) The Entity Identifier for the subject Entity of the
 current record.<a href="#section-3.4.1.1-2.1" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-3.4.1.1-2.2">
                 <strong>entity_types</strong>: (RECOMMENDED) Array of string Entity Type Identifiers. If
-present this claim MUST contain all Entity Type Identifiers of the subject's
+present this Claim MUST contain all Entity Type Identifiers of the subject's
 Entity the responder knows about.<a href="#section-3.4.1.1-2.2" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-3.4.1.1-2.3">
-                <p id="section-3.4.1.1-2.3.1"><strong>entity_infos</strong>: (OPTIONAL) JSON Object containing information intended to be displayed to the user for each entity
-type as described in <a href="#entity-infos">Entity Infos</a>.<br>
+                <p id="section-3.4.1.1-2.3.1"><strong>entity_infos</strong>: (OPTIONAL) JSON Object containing information intended to be displayed to the user for each Entity
+Type as described in <a href="#entity-infos">Entity Infos</a>.<br>
 If the request contains the <code>entity_type</code> parameter, the Entity Infos Object MUST
 only contain Entity Type Identifiers that are among the ones requested, with the exception
 of the <code>federation_entity</code> Entity Type Identifier, which MAY also appear if not explicitly requested.<a href="#section-3.4.1.1-2.3.1" class="pilcrow">¶</a></p>
@@ -1656,13 +1655,13 @@ of the <code>federation_entity</code> Entity Type Identifier, which MAY also app
 as defined in Section 3 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-3.4.1.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-3.4.1.1-3">Additional claims MAY be defined and used in conjunction with the claims above.<a href="#section-3.4.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.4.1.1-3">Additional Claims MAY be defined and used in conjunction with the Claims above.<a href="#section-3.4.1.1-3" class="pilcrow">¶</a></p>
 <div id="entity-infos">
 <section id="section-3.4.1.1.1">
               <h6 id="name-entity-infos">
 <a href="#section-3.4.1.1.1" class="section-number selfRef">3.4.1.1.1. </a><a href="#name-entity-infos" class="section-name selfRef">Entity Infos</a>
               </h6>
-<p id="section-3.4.1.1.1-1">Entity Infos is a JSON Object containing informational claims about a single
+<p id="section-3.4.1.1.1-1">Entity Infos is a JSON Object containing informational Claims about a single
 Entity, but differentiated by its Entity Types.<a href="#section-3.4.1.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.1.1.1-2">Each member name of the JSON object is an Entity Type Identifier and each
 value is an Entity Type Info Object as defined in <a href="#entity-type-info">Entity Type Info</a>.<a href="#section-3.4.1.1.1-2" class="pilcrow">¶</a></p>
@@ -1671,7 +1670,7 @@ value is an Entity Type Info Object as defined in <a href="#entity-type-info">En
                 <h6 id="name-entity-type-info">
 <a href="#section-3.4.1.1.1.1" class="section-number selfRef">3.4.1.1.1.1. </a><a href="#name-entity-type-info" class="section-name selfRef">Entity Type Info</a>
                 </h6>
-<p id="section-3.4.1.1.1.1-1">Entity Type Info is a JSON Object containing informational claims about a
+<p id="section-3.4.1.1.1.1-1">Entity Type Info is a JSON Object containing informational Claims about a
 single Entity Type of an Entity.<a href="#section-3.4.1.1.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.1.1.1.1-2">All Claims specified in section 5.2.2 "Informational Metadata Extensions" of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> MAY be used.<a href="#section-3.4.1.1.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.4.1.1.1.1-3">Additional Claims MAY be defined and used in conjunction with the Claims above.<a href="#section-3.4.1.1.1.1-3" class="pilcrow">¶</a></p>
@@ -1768,7 +1767,7 @@ In addition the following error codes defined by this specification MAY be used:
           </ul>
 <p id="section-3.4.2-3">The following is a non-normative example of an error response:<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
 <div class="lang-http sourcecode" id="section-3.4.2-4">
-<pre>400 Bad Request
+<pre>HTTP/1.1 400 Bad Request
 Content-Type: application/json
 
 {
@@ -1795,7 +1794,7 @@ Content-Type: application/json
 <p id="section-3.5.1-1">The following is a non-normative example of a collection request with the <code>entity_claims</code> parameter specified multiple times:<a href="#section-3.5.1-1" class="pilcrow">¶</a></p>
 <div class="lang-http sourcecode" id="section-3.5.1-2">
 <pre>GET /collection?entity_type=openid_provider&amp;entity_claims=entity_types&amp;entity_claims=trust_marks HTTP/1.1
-Host: openid.sunet.se
+Host: ta.example.org
 </pre><a href="#section-3.5.1-2" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1805,7 +1804,7 @@ Host: openid.sunet.se
           <h4 id="name-example-response-with-entit">
 <a href="#section-3.5.2" class="section-number selfRef">3.5.2. </a><a href="#name-example-response-with-entit" class="section-name selfRef">Example Response with <code>entity_claims</code></a>
           </h4>
-<p id="section-3.5.2-1">The following is a non-normative example of a response to the request above, showing only the requested claims in each Entity Info Object:<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.5.2-1">The following is a non-normative example of a response to the request above, showing only the requested Claims in each Entity Info Object:<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-3.5.2-2">
 <pre>{
   "entities": [
@@ -1816,8 +1815,8 @@ Host: openid.sunet.se
       ],
       "trust_marks": [
         {
-          "trust_mark": "eyJhbGciOiJSUzI1NiIsInR5cCI6InRydXN0LW1hcmsranV3dCJ9...",
-          "trust_mark_type": "https://www.swamid.se/policy/sirtfi/refeds-sirtfi-framework"
+          "trust_mark": "eyJhbGciOiJSUzI1NiIsInR5cCI6InRydXN0LW1hcmsrand0In0...",
+          "trust_mark_type": "https://example.org/trustmark"
         }
       ]
     },
@@ -1841,7 +1840,7 @@ Host: openid.sunet.se
 <p id="section-3.5.3-1">The following is a non-normative example of a collection request with the <code>info_claims</code> parameter specified multiple times:<a href="#section-3.5.3-1" class="pilcrow">¶</a></p>
 <div class="lang-http sourcecode" id="section-3.5.3-2">
 <pre>GET /collection?entity_type=openid_provider&amp;info_claims=display_name&amp;info_claims=logo_uri HTTP/1.1
-Host: openid.sunet.se
+Host: ta.example.org
 </pre><a href="#section-3.5.3-2" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1851,7 +1850,7 @@ Host: openid.sunet.se
           <h4 id="name-example-response-with-info_">
 <a href="#section-3.5.4" class="section-number selfRef">3.5.4. </a><a href="#name-example-response-with-info_" class="section-name selfRef">Example Response with <code>info_claims</code></a>
           </h4>
-<p id="section-3.5.4-1">The following is a non-normative example of a response to the request above, showing only the requested claims in each Entity Info Object:<a href="#section-3.5.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.5.4-1">The following is a non-normative example of a response to the request above, showing only the requested Claims in each Entity Type Info Object:<a href="#section-3.5.4-1" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-3.5.4-2">
 <pre>{
   "entities": [
@@ -1894,9 +1893,9 @@ Host: openid.sunet.se
       <h2 id="name-claims-languages-and-script">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-claims-languages-and-script" class="section-name selfRef">Claims Languages and Scripts</a>
       </h2>
-<p id="section-4-1">Human-readable claim values and claim values that reference human-readable values MAY be represented in multiple languages and scripts. This specification enables such representations in the same manner as defined in Section 14 of OpenID Federation <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> and Section 5.2 of OpenID Connect Core 1.0 <span>[<a href="#OpenID.Core" class="cite xref">OpenID.Core</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">Human-readable Claim values and Claim values that reference human-readable values MAY be represented in multiple languages and scripts. This specification enables such representations in the same manner as defined in Section 14 of OpenID Federation <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> and Section 5.2 of OpenID Connect Core 1.0 <span>[<a href="#OpenID.Core" class="cite xref">OpenID.Core</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">As described in OpenID Connect Core, to specify the languages and scripts, BCP47 <span>[<a href="#RFC5646" class="cite xref">RFC5646</a>]</span> language tags are added to member names, delimited by a <code>#</code> character. For example, <code>family_name#ja-Kana-JP</code> expresses the Family Name in Katakana in Japanese, which is commonly used to index and represent the phonetics of the Kanji representation of the same name represented as <code>family_name#ja-Hani-JP</code>.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">The following is an example of an Entity Type Info Object with claims
+<p id="section-4-3">The following is an example of an Entity Type Info Object with Claims
 represented in multiple languages:<a href="#section-4-3" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4-4">
 <pre>{
@@ -1921,11 +1920,11 @@ represented in multiple languages:<a href="#section-4-3" class="pilcrow">¶</a><
         <h3 id="name-collecting-entities">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-collecting-entities" class="section-name selfRef">Collecting Entities</a>
         </h3>
-<p id="section-5.1-1">It is up to the implementation to decide how entities are collected.
+<p id="section-5.1-1">It is up to the implementation to decide how Entities are collected.
 A general and straightforward approach is described in section 17.2.2 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.
-Implementations MAY use other approaches to collect entities. Those MAY also be based
+Implementations MAY use other approaches to collect Entities. Those MAY also be based
 on additional information available to the responder. An example could be when the
-entity collection response should only include entities with a certain Trust
+Entity Collection response should only include Entities with a certain Trust
 Mark which is issued by the same Entity that provides the Entity Collection
 Endpoint.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 </section>
@@ -1935,14 +1934,14 @@ Endpoint.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
         <h3 id="name-mapping-entity-configuratio">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-mapping-entity-configuratio" class="section-name selfRef">Mapping Entity Configuration Claims to Entity Info Response Claims</a>
         </h3>
-<p id="section-5.2-1">It is up to the implementation to decide how the claims of Entity Info Objects in the response are
-populated. Implementations SHOULD consider the information published by entities
+<p id="section-5.2-1">It is up to the implementation to decide how the Claims of Entity Info Objects in the response are
+populated. Implementations SHOULD consider the information published by Entities
 in their Entity Configuration and MAY consider additional information.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">The following mapping between Claims in the <code>entity_infos</code> response Claim and Metadata Claims in the
 Entity Configuration SHOULD be considered:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-5.2-3.1">
-            <p id="section-5.2-3.1.1"><code>display_name</code>: The <code>display_name</code> Claim is a common Metadata Claim useable with all Entity Types. If set it SHOULD be copied to the response. If the <code>display_name</code> Claim is not set other Claims MAY be considered, such as:<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-3.1.1"><code>display_name</code>: The <code>display_name</code> Claim is a common Metadata Claim usable with all Entity Types. If set it SHOULD be copied to the response. If the <code>display_name</code> Claim is not set other Claims MAY be considered, such as:<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-5.2-3.1.2.1">For the <code>openid_relying_party</code> Entity Type: <code>client_name</code><a href="#section-5.2-3.1.2.1" class="pilcrow">¶</a>
 </li>
@@ -1953,19 +1952,19 @@ Entity Configuration SHOULD be considered:<a href="#section-5.2-2" class="pilcro
             </ul>
 </li>
           <li class="compact" id="section-5.2-3.2">
-            <code>description</code>: The <code>description</code> Claim is a common Metadata Claim useable with all Entity Types. It SHOULD be copied to the response.<a href="#section-5.2-3.2" class="pilcrow">¶</a>
+            <code>description</code>: The <code>description</code> Claim is a common Metadata Claim usable with all Entity Types. It SHOULD be copied to the response.<a href="#section-5.2-3.2" class="pilcrow">¶</a>
 </li>
           <li class="compact" id="section-5.2-3.3">
-            <code>keywords</code>: The <code>keywords</code> Claim is a common Metadata Claim useable with all Entity Types. It SHOULD be copied to the response.<a href="#section-5.2-3.3" class="pilcrow">¶</a>
+            <code>keywords</code>: The <code>keywords</code> Claim is a common Metadata Claim usable with all Entity Types. It SHOULD be copied to the response.<a href="#section-5.2-3.3" class="pilcrow">¶</a>
 </li>
           <li class="compact" id="section-5.2-3.4">
-            <code>logo_uri</code>: The <code>logo_uri</code> Claim is a common Metadata Claim useable with all Entity Types. It SHOULD be copied to the response.<a href="#section-5.2-3.4" class="pilcrow">¶</a>
+            <code>logo_uri</code>: The <code>logo_uri</code> Claim is a common Metadata Claim usable with all Entity Types. It SHOULD be copied to the response.<a href="#section-5.2-3.4" class="pilcrow">¶</a>
 </li>
           <li class="compact" id="section-5.2-3.5">
-            <code>policy_uri</code>: The <code>policy_uri</code> Claim is a common Metadata Claim useable with all Entity Types. It SHOULD be copied to the response.<a href="#section-5.2-3.5" class="pilcrow">¶</a>
+            <code>policy_uri</code>: The <code>policy_uri</code> Claim is a common Metadata Claim usable with all Entity Types. It SHOULD be copied to the response.<a href="#section-5.2-3.5" class="pilcrow">¶</a>
 </li>
           <li class="compact" id="section-5.2-3.6">
-            <code>information_uri</code>: The <code>information_uri</code> Claim is a common Metadata Claim useable with all Entity Types. It SHOULD be copied to the response.<a href="#section-5.2-3.6" class="pilcrow">¶</a>
+            <code>information_uri</code>: The <code>information_uri</code> Claim is a common Metadata Claim usable with all Entity Types. It SHOULD be copied to the response.<a href="#section-5.2-3.6" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -2014,7 +2013,7 @@ information MUST be considered as informational.
 To verify an Entity, proper trust validation according to OpenID Federation 1.0 <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>
 still MUST be done.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">It is also noted that Trust Marks returned in the response MAY not be verified
-and clients MUST consider them as not yet verified.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+and Clients MUST consider them as not yet verified.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2110,6 +2109,7 @@ specification.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
 <p id="appendix-B-1">We would like to thank the following individuals for their contributions to this specification:
+Alan Buxey,
 Niels van Dijk,
 Michael Fraser,
 Marko Ivančić,
@@ -2119,7 +2119,7 @@ Giuseppe De Marco,
 Stefan Santesson,
 Phil Smart,
 Zacharias Törnblom,
-and the Geant Trust &amp; Identity Incubator of Geant5-2.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+and the GÉANT Trust &amp; Identity Incubator of GN5-2.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="document-history">
