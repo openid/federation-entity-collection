@@ -109,11 +109,11 @@ No recommendation is made on which key the ordering is based upon and is left up
 An Entity Collection is not a static dataset: Entities may be added, changed, or removed between
 successive paginated calls. Clients SHOULD NOT expect a series of paginated calls to yield a
 globally consistent snapshot of the data. The responder MAY reflect such changes in subsequent
-pages, which means consecutive pages may skip Entities but MUST NOT contain duplicates. Clients can detect that the
+pages, which means consecutive pages may skip Entities and may contain duplicates. Clients can detect that the
 underlying data may have changed between paginated calls by comparing the `last_updated` value
 (see [Response Format](#response-format)) across responses. When such a change is detected,
-clients SHOULD restart the pagination from the initial request if a consistent view of the
-dataset is required.
+clients may restart the pagination from the initial request if a more consistent view of the
+dataset is desired.
 
 ### Response Limits
 
@@ -235,7 +235,8 @@ result list. This Claim is REQUIRED when additional results are available
 beyond those included in the `entities` array. The content of this Claim is
 entirely up to the responder and its pagination implementation strategy.
 The responder MUST NOT invalidate the `next` pointer because the underlying data changes.
-It is still possible that a `next` pointer may get invalidated when it points to a concrete Entity and
+It is still possible that a `next` pointer may get invalidated when it references changed data,
+such as, when it points to a concrete Entity and
 that Entity is no longer part of the collection (as also noted in the description of
 the [from request parameter](#request-format)).
 - **last_updated**: (RECOMMENDED) Number. Time when the responder last traversed or refreshed its Federation Entity collection. This is expressed as Seconds Since the Epoch, per [@!RFC7519]. If the `last_updated` time changes between paginated calls, this might be an indication for the client that the underlying data may have changed since a previous call. 
