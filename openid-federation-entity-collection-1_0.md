@@ -655,6 +655,8 @@ and the GÉANT Trust & Identity Incubator of GN5-2.
 
 -02
 
+* Clarified that an Entity Collection is not a static dataset: entities can be added, updated, or removed between successive paginated calls and the client may see skipped or duplicated entries.
+* Clarified when a `next` pointer may be invalidated, noting that the responder MUST NOT invalidate it solely because the underlying data changed.
 * Editorial changes
 
 -01
