@@ -5,6 +5,9 @@ This specification acts as an extension to OpenID Federation 1.0 and defines an 
 
 ## Builds
 
+The latest published draft can be viewed at
+https://openid.net/specs/openid-federation-entity-collection-1_0.html
+
 The latest editors' draft can be viewed at
 https://openid.github.io/federation-entity-collection/main.html
 
