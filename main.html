@@ -1220,7 +1220,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-11-04" class="published">4 November 2026</time>
+<time datetime="2026-11-13" class="published">13 November 2026</time>
     </dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
@@ -1459,6 +1459,14 @@ The selected method of pagination offers a mix of consistency and performance ch
           </h4>
 <p id="section-3.1.1-1">As pagination enables consumers of this endpoint to retrieve a subset of the full dataset, the responding Entity MUST ensure consistent ordering is implemented across all returned responses.
 No recommendation is made on which key the ordering is based upon and is left up to the choice of implementing Entities.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-2">An Entity Collection is not a static dataset: Entities may be added, changed, or removed between
+successive paginated calls. Clients SHOULD NOT expect a series of paginated calls to yield a
+globally consistent snapshot of the data. The responder MAY reflect such changes in subsequent
+pages, which means consecutive pages may skip Entities and may contain duplicates. Clients can detect that the
+underlying data may have changed between paginated calls by comparing the <code>last_updated</code> value
+(see <a href="#response-format">Response Format</a>) across responses. When such a change is detected,
+clients may restart the pagination from the initial request if a more consistent view of the
+dataset is desired.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="response-limits">
@@ -1619,7 +1627,12 @@ responder MAY also filter down the list further at its own discretion.<a href="#
               <strong>next</strong>: (OPTIONAL) An opaque pointer to the next page in the
 result list. This Claim is REQUIRED when additional results are available
 beyond those included in the <code>entities</code> array. The content of this Claim is
-entirely up to the responder and its pagination implementation strategy.<a href="#section-3.4.1-3.2" class="pilcrow">¶</a>
+entirely up to the responder and its pagination implementation strategy.
+The responder MUST NOT invalidate the <code>next</code> pointer because the underlying data changes.
+It is still possible that a <code>next</code> pointer may get invalidated when it references changed data,
+such as, when it points to a concrete Entity and
+that Entity is no longer part of the collection (as also noted in the description of
+the <a href="#request-format">from request parameter</a>).<a href="#section-3.4.1-3.2" class="pilcrow">¶</a>
 </li>
             <li class="compact" id="section-3.4.1-3.3">
               <strong>last_updated</strong>: (RECOMMENDED) Number. Time when the responder last traversed or refreshed its Federation Entity collection. This is expressed as Seconds Since the Epoch, per <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. If the <code>last_updated</code> time changes between paginated calls, this might be an indication for the client that the underlying data may have changed since a previous call.<a href="#section-3.4.1-3.3" class="pilcrow">¶</a>
@@ -2131,13 +2144,17 @@ and the GÉANT Trust &amp; Identity Incubator of GN5-2.<a href="#appendix-B-1" c
 <p id="appendix-C-1">[[ To be removed from the final specification ]]<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <p id="appendix-C-2">-02<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-3.1">Editorial changes<a href="#appendix-C-3.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-3.1">Clarified that an Entity Collection is not a static dataset: entities can be added, updated, or removed between successive paginated calls and the client may see skipped or duplicated entries.<a href="#appendix-C-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.2">Clarified the <code>limit</code> request parameter: its value MUST be an integer greater than zero, and when present the returned list SHOULD NOT exceed it.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.2">Clarified when a <code>next</code> pointer may be invalidated, noting that the responder MUST NOT invalidate it solely because the underlying data changed.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.3">Rephrased that Trust Marks returned in the response are not yet verified and MUST be client-verified for clarification.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.3">Editorial changes<a href="#appendix-C-3.3" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.4">Clarified the <code>trust_anchor</code> request parameter when the responder is not a Trust Anchor.<a href="#appendix-C-3.4" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.4">Clarified the <code>limit</code> request parameter: its value MUST be an integer greater than zero, and when present the returned list SHOULD NOT exceed it.<a href="#appendix-C-3.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.5">Rephrased that Trust Marks returned in the response are not yet verified and MUST be client-verified for clarification.<a href="#appendix-C-3.5" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.6">Clarified the <code>trust_anchor</code> request parameter when the responder is not a Trust Anchor.<a href="#appendix-C-3.6" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="appendix-C-4">-01<a href="#appendix-C-4" class="pilcrow">¶</a></p>
